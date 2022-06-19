@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router()
 const {getfeeder, postFeeder, putFeeder, forgiveFeeder} = require('../controllers/feederController')
 
+const {protect} = require('../middleware/authmiddleware')
 
-router.get('/', getfeeder)
 
-router.post('/', postFeeder)
+router.get('/', protect, getfeeder)
 
-router.put('/:id', putFeeder) 
+router.post('/', protect, postFeeder)
 
-router.delete('/:id', forgiveFeeder )
+router.put('/:id', protect, putFeeder) 
+
+router.delete('/:id', protect, forgiveFeeder )
 
 
 // alternitivly  below is the short hand of the same thing above but i kept the above version because 

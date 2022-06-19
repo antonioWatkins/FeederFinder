@@ -2,12 +2,13 @@
 
 const asyncHandler = require('express-async-handler')
 const Feeder = require('../models/feederModel')
+const User = require('../models/userModel')
 
 //@desc get feeder
 //@route get /api/feeder
 // @access Private
 const getfeeder = asyncHandler(async (req, res) => {
-    const feeder = await Feeder.find()
+    const feeder = await Feeder.find({user: req.user.id})
     res.status(200).json(feeder)
 })
 
@@ -21,7 +22,8 @@ const postFeeder = asyncHandler(async (req, res) => {
         throw new Error('the feeder didnt go into the correct bin')
     }
     const feeder = await Feeder.create({
-        player: req.body.player
+        player: req.body.player,
+        user: req.user.id,
     })
     res.status(200).json(feeder)
 })
@@ -36,6 +38,18 @@ const putFeeder = asyncHandler(async (req, res) => {
     if (!feeder) {
         res.status(400)
         throw new Error("feeder not found ");
+    }
+
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+        //make sure the logged in user matches the feeder user
+    if (feeder.user.toString()!== user.id){
+            res.status(401)
+            throw new Error('user not authroized')
     }
     const updatedFeeder = await Feeder.findByIdAndUpdate(req.params.id, req.
         body, {
@@ -57,6 +71,18 @@ const putFeeder = asyncHandler(async (req, res) => {
     if(!feeder) {
         res.status(400)
         throw new Error ('feeder not found')
+    }
+
+    const user = await User.findById(req.user.id)
+
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+        //make sure the logged in user matches the feeder user
+    if (feeder.user.toString()!== user.id){
+            res.status(401)
+            throw new Error('user not authroized')
     }
     await feeder.remove()
     res.status(200).json({id: req.params.id})
