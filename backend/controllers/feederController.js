@@ -1,4 +1,4 @@
-
+const axios = require('axios').default
 
 const asyncHandler = require('express-async-handler')
 const Feeder = require('../models/feederModel')
@@ -88,10 +88,29 @@ const putFeeder = asyncHandler(async (req, res) => {
     })
 
 
-    
+const  toFront = asyncHandler(async (req, res) => {
+    const {player}= req.params;
+console.log(player)
+    const playerData = await SearchForPlayer(player)
+    res.json(playerData)
+    function SearchForPlayer(player) {
+        
+        
+        const options = {
+            method: 'GET',
+            url: 'https://lol_stats.p.rapidapi.com/na1/' + player,
+            headers: {
+                'X-RapidAPI-Key': 'f5363a7e87mshaf27c657b83d227p126a5ajsnddbdde284f81',
+                'X-RapidAPI-Host': 'lol_stats.p.rapidapi.com'
+            }
+        };
+        // returns data from api. if data does not exist it will return null handing the error. if data is present data will show on front end.
+        return axios.request(options).then(response => response.data=="Summoner doesn't exist"? null: response.data).catch(() => null);
+    }
+})
 
 
 
 module.exports = {
-    getfeeder, postFeeder, putFeeder, forgiveFeeder,
+    getfeeder, postFeeder, putFeeder, forgiveFeeder, toFront,
 }

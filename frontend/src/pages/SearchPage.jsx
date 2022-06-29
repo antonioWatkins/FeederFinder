@@ -13,16 +13,13 @@ function SearchPage() {
 
 
 
+
   function SearchForPlayer(player) {
 
 
     const options = {
       method: 'GET',
-      url: 'https://lol_stats.p.rapidapi.com/na1/' + player,
-      headers: {
-        'X-RapidAPI-Key': 'f5363a7e87mshaf27c657b83d227p126a5ajsnddbdde284f81',
-        'X-RapidAPI-Host': 'lol_stats.p.rapidapi.com'
-      }
+      url: '/api/feeder/searchpage/' + player,
     };
     return axios.request(options).then(response => response.data).catch(() => null);
   }
@@ -30,7 +27,7 @@ function SearchPage() {
 
 
   function SearchForPlayers(response) {
-    const players = searchText.split(",").slice(0, 4).map(strplayer => strplayer.toLowerCase().replace('has entered the lobby', '').trim())
+    const players = searchText.split(",").slice(0, 5).map(strplayer => strplayer.toLowerCase().replace('has entered the lobby', '').trim())
     Promise.all(players.map(SearchForPlayer)).then((playerData) => setPlayerdata(playerData.filter(Boolean)));
   }
 
@@ -54,7 +51,7 @@ function SearchPage() {
               </div>
             ))}
           </div>
-       ))}
+        ))}
       </div>
     </>
   );
