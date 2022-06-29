@@ -30,6 +30,7 @@ const registerUser = asyncHandler(async(req,res) => {
     })
   if(user){
     res.status(201).json({
+        success: true,
         _id: user.id,
         name: user.name,
         email: user.email,
@@ -71,13 +72,8 @@ const loginUser = asyncHandler(async (req, res) => {
 // get /api/user/id
 //@access private
 const getUser = asyncHandler(async (req,res) => {
-    const { _id, name, email} = await User.findById(req.user.id)
 
-    res.status(200).json({
-        _id: _id,
-        name,
-        email,
-    })
+    res.status(200).json(req.user)
 })
 
 const gernerateToken = (id) => {

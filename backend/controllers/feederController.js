@@ -40,14 +40,14 @@ const putFeeder = asyncHandler(async (req, res) => {
         throw new Error("feeder not found ");
     }
 
-    const user = await User.findById(req.user.id)
+   
 
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
         //make sure the logged in user matches the feeder user
-    if (feeder.user.toString()!== user.id){
+    if (feeder.user.toString()!== req.user.id){
             res.status(401)
             throw new Error('user not authroized')
     }
@@ -73,14 +73,13 @@ const putFeeder = asyncHandler(async (req, res) => {
         throw new Error ('feeder not found')
     }
 
-    const user = await User.findById(req.user.id)
 
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error('User not found')
     }
         //make sure the logged in user matches the feeder user
-    if (feeder.user.toString()!== user.id){
+    if (feeder.user.toString()!== req.user.id){
             res.status(401)
             throw new Error('user not authroized')
     }
@@ -88,6 +87,8 @@ const putFeeder = asyncHandler(async (req, res) => {
     res.status(200).json({id: req.params.id})
     })
 
+
+    
 
 
 
