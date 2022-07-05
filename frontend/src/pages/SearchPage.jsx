@@ -13,10 +13,10 @@ function SearchPage() {
 
 
 
-
+// the real call is being called on the backend hiding the api keys
   function SearchForPlayer(player) {
 
-
+// the url makes it seems that the website is doing the call but its being done on the backend
     const options = {
       method: 'GET',
       url: '/api/feeder/searchpage/' + player,
@@ -38,17 +38,32 @@ function SearchPage() {
       <div>
         <button className='btn btn-block' onClick={e => SearchForPlayers(e)}> Search for player</button>
       </div>
-      <div className='card'>
+      <div className='goals'>
         {playerData.map((player) => (
-          <div key={player.name} className='playerCard'> <div>Summoner name: {player.name}</div>
-            <div className="soloQ" key={player.soloQ}>Solo Rank: {(player.soloQ || '').replace('/', ' - LP : ')}</div>
-            <div className="flexQ" key={player.flexQ}>Flex Rank: {(player.flexQ || '').replace('/', ' - LP : ')}</div>
+          <div>
 
-            <div>most played champs</div>
+          <p key={player.name} className='goal'> <div>Summoner: {player.name}</div>
+            <div className="soloQ" key={player.soloQ}>Solo: {(player.soloQ || '').replace('/',  'LP : ')}</div>
+            <div className="flexQ" key={player.flexQ}>Flex: {(player.flexQ || '').replace('/',  'LP : ')}</div>
+          </p>
             {player.mostPlayedChamps.map((champ) => (
-              <div key={champ.champName}>
+              
+
+            <div className ='goal2'>
+              <div  key={champ.champName}>
                 Champion: {champ.champName}
               </div>
+            <div key={champ.kda}>
+                KDA: {champ.kda}
+                </div>
+                <div key={champ.winrate}>
+                Win Rate: {champ.winrate}
+                </div>
+                <div key={champ.totalGames}>
+                LPGained: {champ.totalGames}
+                </div>
+            </div>
+            
             ))}
           </div>
         ))}

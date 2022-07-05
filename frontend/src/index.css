@@ -1,7 +1,7 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
+/*
 
 * {
   margin: 0;
@@ -16,7 +16,8 @@
 .playerCard{
   display:flex;
   flex-direction: column;
-  border:solid green
+  border:solid green;
+  font-size: 12px;
 }
 
 body {
@@ -31,6 +32,7 @@ a {
 
 p {
   line-height: 1.7;
+  color: wheat;
 }
 
 ul {
@@ -50,7 +52,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -80,6 +82,11 @@ h3 {
   align-items: center;
 }
 
+.sidebar{
+  height: 100vh;
+  width: 250px;
+  background-color: blue;
+}
 .header ul li a:hover {
   color: #777;
 }
@@ -100,14 +107,25 @@ h3 {
 }
 
 .goals {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: row;
   gap: 10px;
+  justify-content: space-around;
 }
 
 .goal {
-  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(22, 22, 39);
   margin: 10px 0;
+  padding: 20px 0 10px;
+  position: relative;
+}
+
+.goal2 {
+  
+  background-color: grey;
+  
   padding: 20px 0 10px;
   position: relative;
 }
@@ -119,6 +137,10 @@ h3 {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+.itemgaps{
+  
 }
 
 .form,
@@ -225,4 +247,4 @@ h3 {
   .heading p {
     font-size: 1.5rem;
   }
-}
+} */
