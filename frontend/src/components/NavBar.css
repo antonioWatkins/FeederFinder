@@ -12,11 +12,11 @@
 
 .navbar-container {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  
   height: 80px;
   max-width: 1500px;
+  /* border: solid white 1px; */
 }
 
 .navbar-logo {
@@ -79,7 +79,6 @@
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
-    justify-self: start;
   }
 
   .nav-menu {
@@ -95,6 +94,9 @@
   }
 
   .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     background: #242222;
     left: 0;
     opacity: 1;
@@ -157,4 +159,13 @@
     color: #242424;
     transition: 250ms;
   }
+
+  @media screen and (max-width: 960px) {
+    
+    .nav-links2 {
+      display: none;
+      text-decoration: none;
+    }
+  }
+
 }

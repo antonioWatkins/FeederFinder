@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import UserDash from './pages/UserDash';
 import Login from './pages/Login';
@@ -23,7 +24,8 @@ export default function () {
     <NavBar />
     {/* <SideBar /> */}
      <Routes>
-     
+      
+      <Route path='/' exact element = {<HomePage />} />
       <Route path='/register' element = {<Register />} />
       <Route path='/login' element = {<Login />} />
       <Route path='/userdash' element = {<UserDash />} />

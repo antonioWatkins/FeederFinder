@@ -1,68 +1,140 @@
-import React, { useState } from 'react'
-import { FaSearch, FaTimes, FaBars } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { Button } from './Button'
-import './NavBar.css'
-function NavBar() {
+import React, { useState, useEffect } from 'react';
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, } from 'react-router-dom';
+import { logout, reset } from '../features/auth/authSlice'
+import { useSelector } from 'react-redux';
 
-  const [click, setClick] = useState(false)
-  const [button, setButton]= useState(true)
+import './NavBar.css';
+
+function Navbar() {
+  const [name, setName] = useState('')
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
-  const closeMobleMenu = () =>setClick(false);
+  const closeMobileMenu = () => setClick(false);
 
+
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
+  const onLogIn = () => {
+   navigate('/login')
+  }
 
   const showButton = () => {
-    if(window.innerHeight <=960){
-    setButton(false)
-  } else{
-    setButton(true)
-  }
-}
-   
-  
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
 
-  window.addEventListener('resize', showButton)
+  // useEffect(() => {
+  //   if (!localStorage.getItem('loggedIn')) return;
+  //   getUser().then((data) => {
+  //     setName(data.name);
+
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+
+
+  window.addEventListener('resize', showButton);
 
   return (
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to="/" className="navbar-logo">
-            Feeder <i className='fab fa-typo3' />
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+            Feeder Finder
+            <i className="fa fa-binoculars" />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobleMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/feedertable' className='nav-links' onClick={closeMobleMenu}>
-                Feeder Table
+              <Link
+                to='/api/feeder'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+                FeederTable
               </Link>
-              </li>
-              <li className='nav-item'>
-              <Link to='/register' className='nav-links-mobile' onClick={closeMobleMenu}>
+            </li>
+            <li className='nav-item'>
+              <Link
+                to='/api/report'
+                className='nav-links'
+                onClick={closeMobileMenu}
+              >
+
+                Report
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to='/register'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}
+              >
                 Register
               </Link>
-              </li>
-              <li className='nav-item'>
-              <Link to='/login' className='nav-links-mobile' onClick={closeMobleMenu}>
-                Login
+            </li>
+            <li>
+              <Link
+                to='/login'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}
+              >
+                Sign In
               </Link>
-              </li>
+            </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>Register</Button>}
 
+          {user ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
+            :
+            <ul className='nav-links2'>
+              <ol>
+                <Link to='/login'>Sign In</Link>
+              </ol>
+              <ol>
+                <Link  to='/register'>Register</Link>
+              </ol>
+            </ul>
+          }
         </div>
       </nav>
     </>
-  )
+  );
 }
 
-export default NavBar
+export default Navbar;
+
+
+
+
+
 
