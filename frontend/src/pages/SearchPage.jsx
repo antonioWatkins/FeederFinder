@@ -60,7 +60,7 @@ function SearchPage() {
                 Win Rate: {champ.winrate}
                 </div>
                 <div key={champ.totalGames}>
-                LPGained: {champ.totalGames}
+                Games: {champ.totalGames}
                 </div>
             </div>
             

@@ -80,7 +80,7 @@ function Navbar() {
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                FeederTable
+                Journal
               </Link>
             </li>
             <li className='nav-item'>
@@ -117,11 +117,11 @@ function Navbar() {
           {user ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
             :
             <ul className='nav-links2'>
-              <ol>
-                <Link to='/login'>Sign In</Link>
+              <ol className='nav-links2-color'>
+                <Link to='/login' style={{ textDecoration: 'none', color :'white'}}>Sign In</Link>
               </ol>
               <ol>
-                <Link  to='/register'>Register</Link>
+                <Link  to='/register' style={{ textDecoration: 'none', color:' white'}}>Register</Link>
               </ol>
             </ul>
           }

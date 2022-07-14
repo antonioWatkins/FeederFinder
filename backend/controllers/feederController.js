@@ -15,16 +15,28 @@ const getfeeder = asyncHandler(async (req, res) => {
 //@desc post feeder
 //@route post /api/feeder
 // @access Private
+
+//stuck on
 const postFeeder = asyncHandler(async (req, res) => {
     if (!req.body.player) {
-
+            console.log(req.body)
         res.status(400)
         throw new Error('the feeder didnt go into the correct bin')
     }
+    try{
     const feeder = await Feeder.create({
-        player: req.body.player,
-        user: req.user.id,
+        user: req.body.id,
+        player,
+        summoner,
+        playerGrade,
+        gameOverview,
+        laning,
+        teamFighting
     })
+}catch(e){
+    console.log(e)
+}
+
     res.status(200).json(feeder)
 })
 

@@ -8,10 +8,31 @@ const feederSchema = mongoose.Schema({
         ref:'User'
     },
     player: {
+        type:String,
+        required: [true, 'please add a player value']
+    },
+    summoner: {
         type: String,
-        required: [true, 'Please add name value']
-    }
-    
+        required: false,
+    },
+    gameOverview: {
+       type: String,
+       required: false,
+    },
+    laning: {
+        type: String,
+        required: false,
+    },
+    teamfighting:{
+        type: String,
+        required: false,
+    },
+    playergrade:{
+        type: String,
+        required: true
+    },
+
+
 })
 
 module.exports = mongoose.model('Feeder', feederSchema)

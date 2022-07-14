@@ -160,6 +160,12 @@
     transition: 250ms;
   }
 
+  .nav-links2-color a{
+    color: white;
+    text-decoration: none;
+    
+  }
+
   @media screen and (max-width: 960px) {
     
     .nav-links2 {

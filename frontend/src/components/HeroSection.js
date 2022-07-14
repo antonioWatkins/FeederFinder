@@ -1,10 +1,24 @@
 import React from 'react'
-import { Button } from './Button'
+// import { Button } from './Button'
 import '../App.css'
 import './HeroSection.css'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Button } from './Button'
+import './Button.css'
+//mport { Navigate } from 'react-router-dom'
 
 function HeroSection() {
-  return (
+
+
+  let navigate =useNavigate()
+     function onSearchbuttonClick(){
+        navigate('/searchpage')
+
+      }
+      function videoStart(){
+        'playvideo'
+      }
+      return (
     <div className='hero-container'>
       <video src='/videos/video-2.mp4' autoPlay loop muted />
       <h1> Feeder Finder</h1>
@@ -14,6 +28,7 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
+          onClick={onSearchbuttonClick}
         >
           Find Them <i className='fa fa-search'/>
         </Button>
@@ -21,6 +36,7 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
+          onClick={videoStart}
         >
           Dont become These guys!<i className='far fa-play-circle' />
         </Button>

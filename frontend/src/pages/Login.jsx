@@ -6,6 +6,10 @@ import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
 import { login,reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+//import { Button } from 'react-bootstrap'
+import {Button} from '../components/Button'
+import '../components/HeroSection'
+import './Login.css'
 
 function Login() {
 
@@ -56,6 +60,7 @@ function Login() {
   
   return ( 
     <>
+
       <section className='heading'>
         <h1>
           <FaSignInAlt /> Login
@@ -71,8 +76,8 @@ function Login() {
         <input
         type='email'
         className='form-control'
-        id='email'
       name='email'
+        id='email'
         value={email}
         placeholder='Enter Email'
         onChange={onChange}
@@ -89,14 +94,22 @@ function Login() {
         onChange={onChange}
         />
       </div>
-      <div className="form-group">
-        <button type='submit' className='btn btn-block'>
+      <div className="form-group-btn">
+        <button
+        
+          className='btn-login center' 
+          buttonStyle='btn--primary'
+          buttonSize='btn--large'
+        >
           Submit
         </button>
       </div>
       </form>
 </section>
+    <div className='background'>
+    <div className='solidblock'></div>
 
+    </div>
    </> 
       )
 }

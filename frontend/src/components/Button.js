@@ -6,6 +6,8 @@ const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
 
 const SIZES = ['btn--medium', 'btn--large'];
 
+
+
 export const Button = ({
   children,
   type,
@@ -19,15 +21,19 @@ export const Button = ({
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
+  function onSearchbuttonClick(){
+    <Link to='/searchpage'></Link>
+  }
+
   return (
-    <Link to='/' className='btn-mobile'>
-      <button
+    <div className='btn-mobile'>
+      <div
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
         type={type}
       >
         {children}
-      </button>
-    </Link>
+      </div>
+    </div>
   );
 };
