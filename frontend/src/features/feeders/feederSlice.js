@@ -13,7 +13,7 @@ const initialState = {
 export const createFeeder = createAsyncThunk('feeder/create', async (feederData, thunkAPI) => {
   try{
     const token = thunkAPI.getState().auth.user.token
-    return await feederService.createFeeder(feederData)
+    return await feederService.createFeeder(feederData, token)
     
 } catch(error){
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -35,6 +35,7 @@ extraReducers:(builder) => {
       state.isLoading = false
       state.isSuccess = true
       state.feeder.push(action.payload)
+      console.log(state.feeder)
     })
     .addCase(createFeeder.rejected, (state, action) => {
       state.isLoading = false

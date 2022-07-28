@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
-import Header2 from './components/Header2';
+// import Header2 from './components/Header2';
 import NavBar from './components/NavBar';
 import Journal from './pages/Journal';
 //import HomPage2 from './pages/HomPage2';

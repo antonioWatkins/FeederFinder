@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import createFeeder from '../features/feeders/feederSlice'
+import {createFeeder} from '../features/feeders/feederSlice'
 
 import './Journal.css'
 
@@ -17,7 +17,7 @@ function Journal() {
   const [gameOverview, setGameOverview] =useState('') 
   const [playerGrade, setPlayerGrade] = useState('')
   const [teamFighting, setTeamFighting]=useState('')
-  //const [player, setPlayer] = useState('')
+  const [player, setPlayer] = useState('')
   const navigate =useNavigate()
 
   const {user} = useSelector((state) => state.auth)
@@ -31,14 +31,17 @@ function Journal() {
   const dispatch = useDispatch()
  
   const onSubmit = async(event) => {
+    console.log('im here')
     event.preventDefault()
     dispatch(createFeeder({ 
+      player,
       summoner, 
       laning,
       gameOverview,
       playerGrade,
       teamFighting}))
-
+      
+      setPlayer('')
       setSummoner('')
       setlaning('')
       setGameOverview('')
@@ -60,7 +63,7 @@ function Journal() {
         </h1> 
       
       <h3 className='text'>What will you right in your Journal today {user && user.name}</h3>
-      <Form className='form'>
+      <Form className='form' onSubmit={onSubmit}>
 
       <Form.Group className="form-group" controlId="summoner">
         <Form.Label>Summoner Name</Form.Label>
@@ -96,11 +99,11 @@ function Journal() {
           console.log('e')
           setTeamFighting(e.target.value)}} placeholder="team fighting" />
       </Form.Group>
-        <Link to='/api/feeder'>
+       
       <Button variant="primary" type="submit">
         Submit
       </Button>
-        </Link>
+      
       </Form>
     </div>
   )
