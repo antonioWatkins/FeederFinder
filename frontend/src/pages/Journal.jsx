@@ -1,114 +1,71 @@
 import React, { useEffect } from 'react'
-import { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import {Link, Navigate, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {createFeeder} from '../features/feeders/feederSlice'
+import FeederForm from '../components/FeederForm'
+import FeederItems from '../components/FeederItems'
 
 import './Journal.css'
+import { getFeeder } from '../features/feeders/feederSlice'
+import { reset } from '../features/feeders/feederSlice'
+import Spinner from '../components/Spinner'
 
 
 
 function Journal() {
 
-  const [summoner , setSummoner] = useState('')
-  const [laning, setlaning]= useState('')
-  const [gameOverview, setGameOverview] =useState('') 
-  const [playerGrade, setPlayerGrade] = useState('')
-  const [teamFighting, setTeamFighting]=useState('')
-  const [player, setPlayer] = useState('')
+
   const navigate =useNavigate()
-
+  const dispatch = useDispatch()
+  
   const {user} = useSelector((state) => state.auth)
+  
+  const { feeder, isLoading, isError, message } = useSelector(
+    (state) => state.feeder 
+    )
+    console.log(feeder)
 
-  useEffect(()=> {
-    if(!user) {
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+
+    if (!user) {
       navigate('/login')
     }
-  }, [user, navigate])
-  
-  const dispatch = useDispatch()
- 
-  const onSubmit = async(event) => {
-    console.log('im here')
-    event.preventDefault()
-    dispatch(createFeeder({ 
-      player,
-      summoner, 
-      laning,
-      gameOverview,
-      playerGrade,
-      teamFighting}))
-      
-      setPlayer('')
-      setSummoner('')
-      setlaning('')
-      setGameOverview('')
-      setPlayerGrade('')
-      setTeamFighting('')
+
+    dispatch(getFeeder)
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
   }
+  
 
   
   
-  // useEffect(()=>{
-    
-    // })
-    
+  //
     return (
       <div className='container'>
+      <FeederForm />
       
-        <h1 className='text'>
-        Journal
-        </h1> 
-      
-      <h3 className='text'>What will you right in your Journal today {user && user.name}</h3>
-      <Form className='form' onSubmit={onSubmit}>
-
-      <Form.Group className="form-group" controlId="summoner">
-        <Form.Label>Summoner Name</Form.Label>
-        <Form.Control type="text" onChange={(e)=> {
-          setSummoner(e.target.value)
-        }} placeholder="Please Enter Summoners Name" />
-        {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
-      </Form.Group>
-      <Form.Group className='form-group'>
-
-        <Form.Select aria-label='player-ratiing' onSubmit={onSubmit} value={playerGrade} onChange={(e) => setPlayerGrade(e.target.value)}>
-        {/* <option value=''>Player Grade</option> */}
-          <option value='Great Teammate'>Great Teammate</option>
-          <option value='Untiltable'>Untiltable</option>
-          <option value='Great Shotcaller'>Great ShotCaller</option>
-          <option value='Carryable'>Carryable</option> 
-          <option value='Just a Bad Game '>Just a bad Game</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group className="form-group" controlId="formBasicPassword">
-        <Form.Label>
-        </Form.Label>
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-      console.log('e')
-          setGameOverview(e.target.value)}} placeholder="what happened with this player" />
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-          console.log('e')
-          setlaning(e.target.value)}} placeholder="laning" />
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-          
-          console.log('e')
-          setTeamFighting(e.target.value)}} placeholder="team fighting" />
-      </Form.Group>
-       
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-      
-      </Form>
+      <section className='content'>
+        {feeder.length > 0 ? (
+          <div className='goals'>
+            {feeder.map((feeder) => (
+              <FeederItems key={feeder._id} feeder={feeder} />
+            ))}
+          </div>
+        ) : (
+          <h3>Enter your an Entry into your journal</h3>
+        )}
+      </section>
     </div>
   )
 }
 
 
 export default Journal
-

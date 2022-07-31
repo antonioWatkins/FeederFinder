@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {getfeeder, postFeeder, putFeeder, forgiveFeeder, toFront} = require('../controllers/feederController')
+const {getFeeder, postFeeder, putFeeder, forgiveFeeder, toFront} = require('../controllers/feederController')
 
 const {protect} = require('../middleware/authmiddleware')
 
 
-router.get('/', protect, getfeeder)
+router.get('/', protect, getFeeder)
 
 router.post('/', protect, postFeeder)
 

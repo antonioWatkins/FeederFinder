@@ -7,7 +7,7 @@ const User = require('../models/userModel')
 //@desc get feeder
 //@route get /api/feeder
 // @access Private
-const getfeeder = asyncHandler(async (req, res) => {
+const getFeeder = asyncHandler(async (req, res) => {
     const feeder = await Feeder.find({user: req.user.id})
     res.status(200).json(feeder)
 })
@@ -18,11 +18,11 @@ const getfeeder = asyncHandler(async (req, res) => {
 
 //stuck on
 const postFeeder = asyncHandler(async (req, res) => {
-    // if (!req.body.player) {
-    //         console.log(req.body)
-    //     res.status(400)
-    //     throw new Error('the feeder didnt go into the correct bin')
-    // }
+    if (!req.body.summoner) {
+            console.log(req.body)
+        res.status(400)
+        throw new Error('the feeder didnt go into the correct bin')
+    }
     try{
     const feeder = await Feeder.create({
         user: req.user.id,
@@ -124,5 +124,5 @@ console.log(player)
 
 
 module.exports = {
-    getfeeder, postFeeder, putFeeder, forgiveFeeder, toFront,
+    getFeeder, postFeeder, putFeeder, forgiveFeeder, toFront,
 }
