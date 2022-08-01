@@ -99,6 +99,29 @@ const putFeeder = asyncHandler(async (req, res) => {
     res.status(200).json({id: req.params.id})
     })
 
+    const getFeederId = asyncHandler(async (req, res) => {
+        const feeder = await Feeder.findById(req.params.id)
+        
+        if (!feeder) {
+            res.status(400)
+            throw new Error("feeder not found ");
+        }
+    
+       
+    
+        if(!req.user){
+            res.status(401)
+            throw new Error('User not found')
+        }
+            //make sure the logged in user matches the feeder user
+        if (feeder.user.toString()!== req.user.id){
+                res.status(401)
+                throw new Error('user not authroized')
+        }
+        const feederId = await Feeder.findById(req.params.id, req.body)
+            res.status(200).json(feederId)
+        })
+
 
 const  toFront = asyncHandler(async (req, res) => {
     const {player}= req.params;
@@ -124,5 +147,5 @@ console.log(player)
 
 
 module.exports = {
-    getFeeder, postFeeder, putFeeder, forgiveFeeder, toFront,
+    getFeeder, getFeederId, postFeeder, putFeeder, forgiveFeeder, toFront,
 }

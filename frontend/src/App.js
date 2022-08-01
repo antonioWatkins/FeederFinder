@@ -12,7 +12,9 @@ import SearchPage from './pages/SearchPage';
 // import Header2 from './components/Header2';
 import NavBar from './components/NavBar';
 import Journal from './pages/Journal';
+import UpdateJournal from './pages/UpdateJournal';
 //import HomPage2 from './pages/HomPage2';
+
 
 export default function () {
   return (
@@ -29,6 +31,9 @@ export default function () {
       <Route path='/register' element = {<Register />} />
       <Route path='/login' element = {<Login />} />
       <Route path='/api/feeder' element = {<Journal/>} />
+      <Route path='/api/feeder' element = {<Journal/>} />
+      <Route path='/api/feeder/:id' element = {<UpdateJournal/>} />
+      
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
       <Route path ='/searchpage' element = {<SearchPage />} />
       {/* <Route path ='/homepage2' element = {<HomePage2 />} /> */}

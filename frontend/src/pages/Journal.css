@@ -1,18 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.card{
-  display:flex; 
-  justify-content: space-around;
-}
-.playerCard{
-  display:flex;
-  flex-direction: column;
-  border:solid green;
-  font-size: 12px;
 }
 
 body {
@@ -27,7 +17,6 @@ a {
 
 p {
   line-height: 1.7;
-  color: wheat;
 }
 
 ul {
@@ -47,7 +36,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 100%;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -77,11 +66,6 @@ h3 {
   align-items: center;
 }
 
-.sidebar{
-  height: 100vh;
-  width: 250px;
-  background-color: blue;
-}
 .header ul li a:hover {
   color: #777;
 }
@@ -102,37 +86,21 @@ h3 {
 }
 
 .goals {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  justify-content: space-around;
 }
 
 .goal {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(22, 22, 39);
+  background-color: #f4f4f4;
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
 }
 
-.goal2 {
-  
-  background-color: grey;
-  
-  padding: 20px 0 10px;
-  position: relative;
-}
-
 .goal .close {
- display: flex;
- flex-direction: row;
- justify-content: space-evenly;
-}
-
-.itemgaps{
-  
+ 
+background-color: red;
 }
 
 .form,
@@ -156,13 +124,10 @@ h3 {
   font-family: inherit;
 }
 
-.form-group2{
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: inherit;
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
 }
 
 .btn {
@@ -242,4 +207,4 @@ h3 {
   .heading p {
     font-size: 1.5rem;
   }
-} 
+}

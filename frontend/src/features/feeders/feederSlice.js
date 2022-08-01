@@ -31,6 +31,16 @@ export const getFeeder = createAsyncThunk('feeder/getAll', async (_, thunkAPI) =
   }
 })
 
+export const getFeederID = createAsyncThunk('feeder/getID', async (id, thunkAPI) => {
+  try{
+    const token = thunkAPI.getState().auth.user.token
+    return await feederService.getFeederID(id, token)
+  } catch(error){
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const deleteFeeder = createAsyncThunk('feeder/delete', async (id, thunkAPI) => {
   try{
     const token = thunkAPI.getState().auth.user.token
@@ -42,10 +52,10 @@ export const deleteFeeder = createAsyncThunk('feeder/delete', async (id, thunkAP
 }
 })
 
-export const updateFeeder = createAsyncThunk('feeder/update', async (id, thunkAPI) => {
+export const updateFeeder = createAsyncThunk('feeder/update', async (feederData, id, thunkAPI) => {
   try{
     const token = thunkAPI.getState().auth.user.token
-    return await feederService.deleteFeeder(id, token)
+    return await feederService.updateFeeder(feederData, id, token)
     
 } catch(error){
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -64,9 +74,25 @@ export const feederSlice = createSlice({
             state.message = ''
             
         }
-    },
-  extraReducers:(builder) => {
-    builder
+      },
+      extraReducers:(builder) => {
+        builder
+        .addCase(getFeeder.pending, (state) => {
+          state.isLoading = true
+          console.log('getfeeder loading',state.feeder)
+        })
+        .addCase(getFeeder.fulfilled, (state, action) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.feeder = action.payload
+          console.log('getfeeder success',state.feeder)
+          })
+          .addCase(getFeeder.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+            console.log('getfeeder rejected',state.message)
+          })
     .addCase(createFeeder.pending, (state) => {
       state.isLoading = true
     })
@@ -81,22 +107,6 @@ export const feederSlice = createSlice({
       state.isError = true
       state.message = action.payload
     })
-    .addCase(getFeeder.pending, (state) => {
-      state.isLoading = true
-      console.log('getfeeder loading',state.feeder)
-    })
-    .addCase(getFeeder.fulfilled, (state, action) => {
-      state.isLoading = false
-      state.isSuccess = true
-      state.feeder = action.payload
-      console.log('getfeeder success',state.feeder)
-      })
-      .addCase(getFeeder.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-        console.log('getfeeder rejected',state.message)
-      })
       .addCase(deleteFeeder.pending, (state) => {
         state.isLoading = true
       })
@@ -121,7 +131,7 @@ export const feederSlice = createSlice({
           state.isLoading = false
           state.isSuccess = true
           state.feeder = state.feeder.filter(
-            (feeder) => feeder._id !== action.payload.id
+            (feeder) => feeder._id == action.payload.id
           )
           console.log('updatefeeder success',state.feeder)
           })
@@ -131,6 +141,24 @@ export const feederSlice = createSlice({
             state.message = action.payload
             console.log('updatefeeder rejected',state.message)
           })
+          .addCase(getFeederID.pending, (state) => {
+            state.isLoading = true
+            console.log('getfeeder loading',state.feeder)
+          })
+          .addCase(getFeederID.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.feeder = state.feeder.filter(
+              (feeder) => feeder._id == action.payload.id
+            )
+            console.log('getfeeder success',state.feeder)
+            })
+            .addCase(getFeederID.rejected, (state, action) => {
+              state.isLoading = false
+              state.isError = true
+              state.message = action.payload
+              console.log('getfeeder rejected',state.message)
+            })
 }
 })
 

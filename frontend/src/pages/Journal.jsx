@@ -33,7 +33,7 @@ function Journal() {
       navigate('/login')
     }
 
-    dispatch(getFeeder)
+    dispatch(getFeeder())
 
     return () => {
       dispatch(reset())
