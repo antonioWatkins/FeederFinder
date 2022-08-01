@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css'
+import useState from 'react'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import UserDash from './pages/UserDash';
 import Login from './pages/Login';
@@ -13,10 +14,13 @@ import SearchPage from './pages/SearchPage';
 import NavBar from './components/NavBar';
 import Journal from './pages/Journal';
 import UpdateJournal from './pages/UpdateJournal';
+import feederSlice from './features/feeders/feederSlice';
 //import HomPage2 from './pages/HomPage2';
 
 
 export default function () {
+
+  
   return (
     <div className='App'>
     <>
@@ -32,7 +36,7 @@ export default function () {
       <Route path='/login' element = {<Login />} />
       <Route path='/api/feeder' element = {<Journal/>} />
       <Route path='/api/feeder' element = {<Journal/>} />
-      <Route path='/api/feeder/:id' element = {<UpdateJournal/>} />
+      <Route path='/api/feeder/:id' element = {<UpdateJournal />} />
       
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
       <Route path ='/searchpage' element = {<SearchPage />} />

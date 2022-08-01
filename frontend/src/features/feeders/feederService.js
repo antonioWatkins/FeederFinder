@@ -53,14 +53,14 @@ const response = await axios.delete(API_URL+feederId , config)
 return response.data
 }
 
-const updateeFeeder =async(feederId,feederData, token) => {
+const updateFeeder =async(feederId,feederData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
 
-const response = await axios.patch(API_URL+feederId ,feederData, config)
+const response = await axios.put(API_URL+feederId ,feederData, config)
 
 return response.data
 }
@@ -69,7 +69,7 @@ const feederService = {
   createFeeder,
   getFeeder,
   deleteFeeder,
-  updateeFeeder,
+  updateFeeder,
   getFeederID
 }
 

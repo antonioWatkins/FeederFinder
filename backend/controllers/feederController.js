@@ -28,7 +28,7 @@ const postFeeder = asyncHandler(async (req, res) => {
         user: req.user.id,
         player: req.user.name,
         summoner: req.body.summoner,
-        playergrade: req.body.playerGrade,
+        playerGrade: req.body.playerGrade,
         gameOverview: req.body.gameOverview,
         laning: req.body.laning,
         teamFighting: req.body.teamFighting
@@ -63,10 +63,7 @@ const putFeeder = asyncHandler(async (req, res) => {
             res.status(401)
             throw new Error('user not authroized')
     }
-    const updatedFeeder = await Feeder.findByIdAndUpdate(req.params.id, req.
-        body, {
-            new: true,
-        })
+    const updatedFeeder = await Feeder.findByIdAndUpdate(req.params.id, req.body, { new: true })
         
         res.status(200).json(updatedFeeder)
     })

@@ -27,7 +27,7 @@ const feederSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    playergrade:{
+    playerGrade:{
         type: String,
         required: true
     },
