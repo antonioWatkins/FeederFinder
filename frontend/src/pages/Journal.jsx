@@ -6,7 +6,7 @@ import FeederItems from '../components/FeederItems'
 
 import './Journal.css'
 import { getFeeder } from '../features/feeders/feederSlice'
-import { reset } from '../features/feeders/feederSlice'
+import { reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
 
 

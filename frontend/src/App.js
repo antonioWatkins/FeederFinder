@@ -35,7 +35,6 @@ export default function () {
       <Route path='/register' element = {<Register />} />
       <Route path='/login' element = {<Login />} />
       <Route path='/api/feeder' element = {<Journal/>} />
-      <Route path='/api/feeder' element = {<Journal/>} />
       <Route path='/api/feeder/:id' element = {<UpdateJournal />} />
       
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
