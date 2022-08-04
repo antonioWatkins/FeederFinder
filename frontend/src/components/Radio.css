@@ -3,7 +3,8 @@
 }
 
 
-.btn {
+.rad {
+  display:block;
   padding: 8px 20px;
   border-radius: 2px;
   outline: none;
@@ -11,13 +12,20 @@
   cursor: pointer;
 }
 
-.btn--primary {
+.rad--primary {
   background-color: var(--primary);
   color: black;
   border: 1px solid var(--primary)
 }
 
-.btn--outline{
+.rad--radio{
+  background-color: black;
+  color: white;
+  border: 1px solid var(--primary)
+
+}
+
+.rad--outline{
   background-color: transparent;
   color:#fff;
   padding: 8px 20px;
@@ -25,17 +33,17 @@
 transition: all 0.3s ease-out;
 }
 
-.btn--medium{
+.rad--medium{
   padding: 8px 20px;
   font-size: 20px;
 }
 
-.btn--large{
+.rad--large{
   padding: 12px 26px;
   font-size: 20px;
 } 
 
-.btn--report{
+.rad--report{
   padding: 12px 26px;
   font-size: 20px;
 } 
@@ -43,16 +51,26 @@ transition: all 0.3s ease-out;
 .radioWidth{
   max-width: 20vw;
 }
-.btn--medium:hover,
-.btn--large:hover{
+.rad--medium:hover,
+.rad--large:hover{
 
   background: white;
   color: black;
   transition: all 0.3s ease-out;
 }
 
-.btn--report:hover{
-  background: green;
+.rad--report:hover{
+  background: gray;
   color: black;
+  box-shadow:0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.rad--report:active{
+  background:blue;
+  color: white;
+  box-shadow:none;
 }
 
+/* .rad--report:active{
+  background: blue;
+  color:black;
+} */

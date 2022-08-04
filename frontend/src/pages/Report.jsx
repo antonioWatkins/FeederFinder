@@ -1,14 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState , useEffect} from 'react'
+import { Navigate,useNavigate, useParams } from 'react-router-dom'
+import { useSelector,useDispatch } from 'react-redux'
+import { createReport } from '../features/reports/reportSlice'
+import {reset} from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
+import { Radio } from '../components/Radio'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useDispatch } from 'react-redux'
-import { createFeeder } from '../features/feeders/feederSlice'
-// import { FormEventHandler } from 'react'
-import { useSelector } from 'react-redux'
+import './Report.css'
 
-function FeederForm() {
-  
+
+
+
+
+
+function Report() {
+
   const [summoner , setSummoner] = useState('')
   const [laning, setlaning]= useState('')
   const [gameOverview, setGameOverview] =useState('') 
@@ -23,7 +30,7 @@ function FeederForm() {
   const onSubmit = async(event) => {
     console.log('im here')
     event.preventDefault()
-    dispatch(createFeeder({ 
+    dispatch(createReport({ 
       player,
       summoner, 
       laning,
@@ -42,7 +49,7 @@ function FeederForm() {
   return (
     <div>
          <h1 className='text'>
-        Journal
+        Warning You are about to put your thoughts out in the the interwebs
         </h1> 
       
       {/* <h3 className='text'>What will you right in your Journal today {user && user.name}</h3> */}
@@ -104,4 +111,5 @@ function FeederForm() {
   )
 }
 
-export default FeederForm
+
+export default Report

@@ -12,11 +12,10 @@ import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 // import Header2 from './components/Header2';
 import NavBar from './components/NavBar';
+import Report from './pages/Report';
 import Journal from './pages/Journal';
 import UpdateJournal from './pages/UpdateJournal';
-import feederSlice from './features/feeders/feederSlice';
-//import HomPage2 from './pages/HomPage2';
-
+import ReportShow from './pages/ReportShow';
 
 export default function () {
 
@@ -36,7 +35,8 @@ export default function () {
       <Route path='/login' element = {<Login />} />
       <Route path='/api/feeder' element = {<Journal/>} />
       <Route path='/api/feeder/:id' element = {<UpdateJournal />} />
-      
+      <Route path='/api/report/:id' element = {<Report />} />
+      <Route path='/api/reportshow' element = {<ReportShow />} />
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
       <Route path ='/searchpage' element = {<SearchPage />} />
       {/* <Route path ='/homepage2' element = {<HomePage2 />} /> */}

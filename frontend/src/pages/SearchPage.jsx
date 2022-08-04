@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios';
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import {Link} from 'react-router-dom/'
 
 function SearchPage() {
 
@@ -63,8 +65,11 @@ function SearchPage() {
                 Games: {champ.totalGames}
                 </div>
             </div>
-            
             ))}
+                <h3> make a report </h3>
+            <Link to={`/api/report/${player.name}`}>
+             Report 
+            </Link>
           </div>
         ))}
       </div>

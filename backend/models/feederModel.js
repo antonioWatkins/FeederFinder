@@ -13,7 +13,7 @@ const feederSchema = mongoose.Schema({
     },
     summoner: {
         type: String,
-        required: false,
+        required: true,
     },
     gameOverview: {
        type: String,

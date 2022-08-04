@@ -31,8 +31,12 @@ function FeederItems({ feeder }) {
           X
         </Button>
       </div>
+    
     <Button variant='Primary' href={(`/api/feeder/${feeder._id}`)}>
       update
+    </Button>
+    <Button variant='Secondary' href={(`/api/report/${feeder._id}`)}>
+    report
     </Button>
     </div>
       {/* <button onClick={() => dispatch(updateFeeder(feeder._id))} className='close'>

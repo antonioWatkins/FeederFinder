@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
 
-const SIZES = ['btn--medium', 'btn--large'];
+const SIZES = ['btn--medium', 'btn--large', 'btn--report'];
 
 
 
@@ -21,9 +21,7 @@ export const Button = ({
 
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
-  function onSearchbuttonClick(){
-    <Link to='/searchpage'></Link>
-  }
+
 
   return (
     <div className='btn-mobile'>
