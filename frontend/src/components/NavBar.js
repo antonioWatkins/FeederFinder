@@ -1,37 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, reset } from '../features/auth/authSlice';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useNavigate, } from 'react-router-dom';
-import { logout, reset } from '../features/auth/authSlice'
-import { useSelector } from 'react-redux';
 
 import './NavBar.css';
 
 function Navbar() {
-  const [name, setName] = useState('')
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.auth)
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
-    dispatch(logout())
-    dispatch(reset())
-    navigate('/')
-  }
-
-  const onLogIn = () => {
-   navigate('/login')
-  }
+    dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  };
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -52,8 +42,6 @@ function Navbar() {
   useEffect(() => {
     showButton();
   }, []);
-
-
 
   window.addEventListener('resize', showButton);
 
@@ -85,7 +73,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/api/reportshow'
+                to='/api/report/'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -115,13 +103,12 @@ function Navbar() {
           </ul>
 
           {user ? button && <Button buttonStyle='btn--outline' onClick={onLogout}>Logout</Button>
-            :
-            <ul className='nav-links2'>
+            : <ul className='nav-links2'>
               <ol className='nav-links2-color'>
-                <Link to='/login' style={{ textDecoration: 'none', color :'white'}}>Sign In</Link>
+                <Link to='/login' style={{ textDecoration: 'none', color: 'white' }}>Sign In</Link>
               </ol>
               <ol>
-                <Link  to='/register' style={{ textDecoration: 'none', color:' white'}}>Register</Link>
+                <Link to='/register' style={{ textDecoration: 'none', color: ' white' }}>Register</Link>
               </ol>
             </ul>
           }
@@ -132,9 +119,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
-
-
-

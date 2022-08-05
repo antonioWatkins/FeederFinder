@@ -8,7 +8,7 @@ const User = require('../models/userModel')
 //@route get /api/report
 // @access Private
 const getReport = asyncHandler(async (req, res) => {
-    const report = await Report.find({user: req.user.id})
+    const report = await Report.find()
     res.status(200).json(report)
 })
 
@@ -25,13 +25,11 @@ const postReport = asyncHandler(async (req, res) => {
     }
     try{
     const report = await Report.create({
-        user: req.user.id,
-        player: req.user.name,
+        userid: req.body.userid,
+        player: req.body.player,
         summoner: req.body.summoner,
-        playerGrade: req.body.playerGrade,
-        gameOverview: req.body.gameOverview,
-        laning: req.body.laning,
-        teamFighting: req.body.teamFighting
+        post: req.body.post,
+        
     })
     res.status(200).json(report)
 }catch(e){
@@ -59,10 +57,7 @@ const putReport = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
         //make sure the logged in user matches the report user
-    if (report.user.toString()!== req.user.id){
-            res.status(401)
-            throw new Error('user not authroized')
-    }
+   
     const updatedReport = await Report.findByIdAndUpdate(req.params.id, req.body, { new: true })
         
         res.status(200).json(updatedReport)
@@ -119,11 +114,27 @@ const putReport = asyncHandler(async (req, res) => {
             res.status(200).json(reportId)
         })
 
+       const likeReport = asyncHandler(async (req, res) => {
+            const id = req.params.id;
+            const { userId } = req.body;
+            try {
+              const report = await reportModel.findById(id);
+              if (report.likes.includes(userId)) {
+                await report.updateOne({ $pull: { likes: userId } });
+                res.status(200).json("Post disliked");
+              } else {
+                await report.updateOne({ $push: { likes: userId } });
+                res.status(200).json("Post liked");
+              }
+            } catch (error) {
+              res.status(500).json(error);
+            }
+          });
 
 
 
 
 
 module.exports = {
-    getReport, getReportId, postReport, putReport, forgiveReport,
+    getReport, getReportId, postReport, putReport, forgiveReport, likeReport,
 }

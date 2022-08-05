@@ -1,57 +1,53 @@
-import React, { useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import FeederForm from '../components/FeederForm'
-import FeederItems from '../components/FeederItems'
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-shadow */
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+// eslint-disable-next-line import/extensions
+import FeederForm from '../components/FeederForm';
+// eslint-disable-next-line import/extensions
+import FeederItems from '../components/FeederItems';
 
-import './Journal.css'
-import { getFeeder } from '../features/feeders/feederSlice'
-import { reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
-
-
+import './Journal.css';
+import { getFeeder } from '../features/feeders/feederSlice';
+import { reset } from '../features/auth/authSlice';
+// eslint-disable-next-line import/extensions
+import Spinner from '../components/Spinner';
 
 function Journal() {
-
-
-  const navigate =useNavigate()
-  const dispatch = useDispatch()
-  
-  const {user} = useSelector((state) => state.auth)
-  
-  const { feeder, isLoading, isError, message } = useSelector(
-    (state) => state.feeder 
-    )
-    console.log(feeder)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const {
+    feeder, isLoading, isError, message,
+  } = useSelector(
+    (state) => state.feeder,
+  );
+  console.log(feeder);
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      console.log(message);
     }
 
     if (!user) {
-      navigate('/login')
+      navigate('/login');
     }
 
-    dispatch(getFeeder())
+    dispatch(getFeeder());
 
     return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
-  
-
-  
-  
-  //
-    return (
+  return (
       <div className='container'>
       <FeederForm />
-      
       <section className='content'>
         {feeder.length > 0 ? (
           <div className='goals'>
@@ -64,8 +60,7 @@ function Journal() {
         )}
       </section>
     </div>
-  )
+  );
 }
 
-
-export default Journal
+export default Journal;

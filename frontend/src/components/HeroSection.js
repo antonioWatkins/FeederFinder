@@ -1,24 +1,21 @@
-import React from 'react'
+import React from 'react';
 // import { Button } from './Button'
-import '../App.css'
-import './HeroSection.css'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { Button } from './Button'
-import './Button.css'
-//mport { Navigate } from 'react-router-dom'
+import '../App.css';
+import './HeroSection.css';
+import { useNavigate } from 'react-router-dom';
+import { Button } from './Button';
+import './Button.css';
+// mport { Navigate } from 'react-router-dom'
 
 function HeroSection() {
-
-
-  let navigate =useNavigate()
-     function onSearchbuttonClick(){
-        navigate('/searchpage')
-
-      }
-      function videoStart(){
-        'playvideo'
-      }
-      return (
+  const navigate = useNavigate();
+  function onSearchbuttonClick() {
+    navigate('/searchpage');
+  }
+  function videoStart() {
+    'playvideo';
+  }
+  return (
     <div className='hero-container'>
       <video src='/videos/video-2.mp4' autoPlay loop muted />
       <h1> Feeder Finder</h1>
@@ -43,7 +40,7 @@ function HeroSection() {
       </div>
 
     </div>
-  )
+  );
 }
 
-export default HeroSection
+export default HeroSection;

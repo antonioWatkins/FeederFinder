@@ -1,17 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const {getReport,  postReport, putReport,} = require('../controllers/reportController')
+const {getReport, postReport, likeReport, putReport} = require('../controllers/reportController')
 
 const {protect} = require('../middleware/authmiddleware')
 
 
-router.get('/:id', protect, getReport)
-
-
-
+router.get('/', getReport)
 router.post('/:id', protect, postReport)
-
-
 router.put('/:id', protect, putReport)
+
+router.put('/:id/like', likeReport)
+
 
 module.exports = router

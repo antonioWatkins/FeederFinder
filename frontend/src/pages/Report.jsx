@@ -1,115 +1,72 @@
-import React, { useState , useEffect} from 'react'
-import { Navigate,useNavigate, useParams } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
-import { createReport } from '../features/reports/reportSlice'
-import {reset} from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
-import { Radio } from '../components/Radio'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import './Report.css'
+/* eslint-disable no-underscore-dangle */
+import React, { useState } from 'react';
 
-
-
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { createReport } from '../features/reports/reportSlice';
+import './Report.css';
 
 function Report() {
+  const [summoner, setSummoner] = useState('');
+  const [post, setPost] = useState('');
 
-  const [summoner , setSummoner] = useState('')
-  const [laning, setlaning]= useState('')
-  const [gameOverview, setGameOverview] =useState('') 
-  const [playerGrade, setPlayerGrade] = useState('')
-  const [teamFighting, setTeamFighting]=useState('')
-  const [player, setPlayer] = useState('')
-
-  //const navigate =useNavigate()
+  // const navigate =useNavigate()
   // const {user} = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const onSubmit = async(event) => {
-    console.log('im here')
-    event.preventDefault()
-    dispatch(createReport({ 
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  console.log(user._id, 'id');
+  const player = user.name;
+  console.log(player);
+  const onSubmit = async (event) => {
+    console.log('im here');
+    event.preventDefault();
+    dispatch(createReport({
+      // eslint-disable-next-line no-underscore-dangle
+      userid: user._id,
       player,
-      summoner, 
-      laning,
-      gameOverview,
-      playerGrade,
-      teamFighting}))
-      
-      setPlayer('')
-      setSummoner('')
-      setlaning('')
-      setGameOverview('')
-      setPlayerGrade('')
-      setTeamFighting('')
-  }
+      summoner,
+      post,
+    }));
+
+    setSummoner('');
+    setPost('');
+  };
 
   return (
     <div>
          <h1 className='text'>
         Warning You are about to put your thoughts out in the the interwebs
-        </h1> 
-      
-      {/* <h3 className='text'>What will you right in your Journal today {user && user.name}</h3> */}
+        </h1>
+
       <Form className='form' onSubmit={onSubmit}>
 
       <Form.Group className="form-group" controlId="summoner">
         <Form.Label>Summoner Name</Form.Label>
-        <Form.Control type="text" 
+        <Form.Control type="text"
          value={summoner}
-        
-          onChange={(e)=> {
-          setSummoner(e.target.value)
-         
-
-        }} placeholder="Please Enter Summoners Name" />
-        {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
-      </Form.Group>
-      <Form.Group className='form-group'>
-
-        <Form.Select 
-        aria-label='player-ratiing' 
-        onSubmit={onSubmit} 
-        value={playerGrade} 
-        onChange={(e) => setPlayerGrade(e.target.value)}
-        
-        >
-        {/* <option value=''>Player Grade</option> */}
-        <option value=''>Must select a Grade</option>
-          <option value='Great Teammate'>Great Teammate</option>
-          <option value='Untiltable'>Untiltable</option>
-          <option value='Great Shotcaller'>Great ShotCaller</option>
-          <option value='Carryable'>Carryable</option> 
-          <option value='Just a Bad Game '>Just a bad Game</option>
-        </Form.Select>
+          onChange={(e) => {
+            setSummoner(e.target.value);
+          }} placeholder="Please Enter Summoners Name" />
       </Form.Group>
       <Form.Group className="form-group" controlId="formBasicPassword">
-        <Form.Label>
-        </Form.Label>
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-      console.log('e')
-          setGameOverview(e.target.value)}} placeholder="what happened with this player" />
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-          console.log('e')
-          setlaning(e.target.value)}} placeholder="laning" />
-        <Form.Control className='form-group2' type="textarea" onChange={(e)=> {
-          
-          console.log('e')
-          setTeamFighting(e.target.value)}} placeholder="team fighting" />
-      </Form.Group>
-       
+      <Form.Label>Discribe the player</Form.Label>
+        <Form.Control type="text"
+         value={post}
+          onChange={(e) => {
+            setPost(e.target.value);
+          }} placeholder="Enter players Details" />
+       </Form.Group>
+
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      
+
       </Form>
     </div>
-  )
+  );
 }
 
-
-export default Report
+export default Report;

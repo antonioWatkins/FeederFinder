@@ -1,64 +1,61 @@
-import React from 'react'
-import { FaSignInAlt } from 'react-icons/fa'
-import { useState, useEffect } from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
-import {toast} from 'react-toastify'
-import { login,reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
-//import { Button } from 'react-bootstrap'
-import {Button} from '../components/Button'
-import '../components/HeroSection'
-import './Login.css'
+import React, { useState, useEffect } from 'react';
+import { FaSignInAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { login, reset } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner.jsx';
+import '../components/HeroSection';
+import './Login.css';
 
 function Login() {
-
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-  })
+  });
 
-  const {email, password} = formData
+  const { email, password } = formData;
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    user, isLoading, isError, isSuccess, message,
+  } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if(isError){
-      toast.error(message)
+    if (isError) {
+      toast.error(message);
     }
 
-    if(isSuccess || user){
-      navigate('/')
+    if (isSuccess || user) {
+      navigate('/');
     }
 
-    dispatch(reset())
-  },[user, isError, isSuccess, message,])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message]);
 
-  
   const onChange = (e) => {
-    setFormData((prevState)=>({
+    setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
-    }))
-  }
-  
-  const onSubmit=(e)=>{
-    e.preventDefault()
-    
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
     const userData = {
       email,
-      password
-    }
-    dispatch(login(userData))
+      password,
+    };
+    dispatch(login(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
   }
-  
-  if(isLoading){
-    return <Spinner />
-  }
-  
-  return ( 
+
+  return (
     <>
 
       <section className='heading'>
@@ -70,7 +67,7 @@ function Login() {
 
       <section className='form'>
       <form onSubmit={onSubmit}>
-      
+
       <div className='form-group'>
 
         <input
@@ -96,8 +93,8 @@ function Login() {
       </div>
       <div className="form-group-btn">
         <button
-        
-          className='btn-login center' 
+
+          className='btn-login center'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
         >
@@ -110,9 +107,8 @@ function Login() {
     <div className='solidblock'></div>
 
     </div>
-   </> 
-      )
+   </>
+  );
 }
 
-      export default Login
-
+export default Login;

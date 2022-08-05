@@ -1,24 +1,16 @@
-import { useDispatch } from 'react-redux'
-import { deleteFeeder } from '../features/feeders/feederSlice'
-import { updateFeeder } from '../features/feeders/feederSlice'
-import Button from 'react-bootstrap/Button'
-import FeederForm from './FeederForm'
-
+/* eslint-disable no-underscore-dangle */
+import { useDispatch } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import { deleteFeeder } from '../features/feeders/feederSlice';
 
 function FeederItems({ feeder }) {
-  const dispatch = useDispatch()
-
-  function showUpDateOptions(){
-    <div><FeederForm /></div>
-
-  }
-   
+  const dispatch = useDispatch();
 
   return (
     <div>
       <div className='goal'>
         <div>{new Date(feeder.createdAt).toLocaleString('en-US')}</div>
-      
+
         <h3>summoner: {feeder.summoner}</h3>
 
         <p>laning: {feeder.laning}</p>
@@ -31,7 +23,7 @@ function FeederItems({ feeder }) {
           X
         </Button>
       </div>
-    
+
     <Button variant='Primary' href={(`/api/feeder/${feeder._id}`)}>
       update
     </Button>
@@ -39,11 +31,8 @@ function FeederItems({ feeder }) {
     report
     </Button>
     </div>
-      {/* <button onClick={() => dispatch(updateFeeder(feeder._id))} className='close'>
-      update
-    </button>*/}
-    </div> 
-  )
+    </div>
+  );
 }
 
-export default FeederItems
+export default FeederItems;

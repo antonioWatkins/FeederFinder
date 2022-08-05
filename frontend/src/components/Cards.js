@@ -1,7 +1,6 @@
-import React from 'react'
-import CardItems from './CardItems'
-import './Cards.css'
-
+import React from 'react';
+import CardItems from './CardItems';
+import './Cards.css';
 
 function Cards() {
   return (
@@ -10,7 +9,7 @@ function Cards() {
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
-            <CardItems 
+            <CardItems
               src="/img/Kennen.png"
               text='Do you think you are a feeder? Train Here! with our Partners and get better!'
               label='The First Step'
@@ -26,7 +25,7 @@ function Cards() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Cards
+export default Cards;

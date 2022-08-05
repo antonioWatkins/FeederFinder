@@ -26,12 +26,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "lint":"eslint src --fix"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb-base"
     ]
   },
   "browserslist": {
@@ -45,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^15.0.0"
   }
 }

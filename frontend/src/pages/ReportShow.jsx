@@ -1,71 +1,48 @@
-import React from 'react'
-import { useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import {getReport} from '../features/reports/reportSlice'
-import { reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
-
-
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-shadow */
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getReport } from '../features/reports/reportSlice';
+import { reset } from '../features/auth/authSlice';
+// eslint-disable-next-line import/no-unresolved
+import Spinner from '../components/Spinner';
+import Likes from '../components/Likes';
 
 function ReportShow() {
-  const navigate =useNavigate()
-  const dispatch = useDispatch()
-  
-  const {user} = useSelector((state) => state.auth)
-  
-  const { report, isLoading, isError, message } = useSelector(
-    (state) => state.report 
-    )
-    console.log(report)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const {
+    report, isLoading, isError, message,
+  } = useSelector(
+    (state) => state.report,
+  );
+  console.log(report);
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      console.log(message);
     }
-
-    if (!user) {
-      navigate('/login')
-    }
-
-    dispatch(getReport())
+    dispatch(getReport());
 
     return () => {
-      dispatch(reset())
-    }
-  }, [user, navigate, isError, message, dispatch])
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
-  
-  
   return (
-    
-    
-   
-      <div className='goal'>
-      <section className='content'>
-       
-          <div className='goals'>
-            {report.map((report) => (
-              <div key={report._id} report={report}>
-     
-      
-        <h3>summoner: {report.summoner}</h3>
-
-        <p>laning: {report.laning}</p>
-        <p>game Overview: {report.gameOverview}</p>
-        <p>player Grade: {report.playerGrade}</p>
-        <p> teamFighting: {report.teamfighting}</p>
+   <div className='goal'>
+    <div className='goals'>
+      {report.map((report, id) => (
+       <Likes data={report} key={id} />))}
       </div>
-            ))}
-        </div>
-       
-      </section>
-    
-    </div>
-  )
+      </div>
+  );
 }
 
-export default ReportShow
+export default ReportShow;

@@ -1,27 +1,23 @@
+/* eslint-disable import/prefer-default-export */
 import React from 'react';
 import './Radio.css';
-import { Link } from 'react-router-dom';
 
 const STYLES = ['rad--primary', 'rad--outline', 'rad--test', 'rad--radio'];
 
 const SIZES = ['rad--medium', 'rad--large', 'rad--report'];
-
-
 
 export const Radio = ({
   children,
   type,
   onClick,
   radioStyle,
-  radioSize
+  radioSize,
 }) => {
   const checkRadioStyle = STYLES.includes(radioStyle)
     ? radioStyle
     : STYLES[0];
 
   const checkRadioSize = SIZES.includes(radioSize) ? radioSize : SIZES[0];
-
-
 
   return (
     <div className='rad-mobile'>

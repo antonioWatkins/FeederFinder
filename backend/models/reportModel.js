@@ -3,40 +3,25 @@ const mongoose = require('mongoose')
 
 const reportSchema = mongoose.Schema({
 
-  user:{
-    type: mongoose.Schema.Types.ObjectId,
-    required:true,
-    ref:'User'
-},
-player: {
+  
+userid:{
     type:String,
-    required: [true, 'please add a player value']
+    required: true,
+},
+player:{
+    type: String,
+    required: true,
 },
 summoner: {
     type: String,
     required: true,
 },
-gameOverview: {
+post: {
    type: String,
    required: false,
-},
-laning: {
-    type: String,
-    required: false,
-},
-teamfighting:{
-    type: String,
-    required: false,
-},
-playerGrade:{
-    type: String,
-    required: true
-},
 
- 
-
-
-    
+},
+likes: [],
 },
 
 {timestamps: true})

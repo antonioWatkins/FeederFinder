@@ -1,5 +1,5 @@
-import React from 'react'
-//import { Link } from 'react-router-dom'
+import React from 'react';
+// import { Link } from 'react-router-dom'
 
 function CardItems(props) {
   return (
@@ -15,7 +15,7 @@ function CardItems(props) {
       </a>
     </li>
   </>
-  )
+  );
 }
 
-export default CardItems
+export default CardItems;
