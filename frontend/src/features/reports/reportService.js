@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = '/api/report/id';
 
-const API_URL_SHOW = '/api/report/id';
+const API_URL_SHOW = '/api/report/';
 
 const createReport = async (reportData, token) => {
   const config = {
@@ -29,11 +29,11 @@ const getReport = async (token) => {
 
 const likeReport = async (id, userId, token) => {
   const config = {
-    headerr: {
+    headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.put(`posts/${id}/like`, config, { userId });
+  const response = await axios.put(`${id}/like`, config, { userId });
   return response.data;
 };
 

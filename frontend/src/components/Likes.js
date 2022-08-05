@@ -17,9 +17,9 @@ function Likes({ data }) {
     );
   };
   return (
-    <div className='PostReact'>
+    <div className='just work'>
     <img
-    src={liked ? '/public/img/like.png' : '/public/img/unlike.png'}
+    src={liked ? '/img/like.png' : '/img/unlike.png'}
     alt=''
     onClick={handleLike}
     />
@@ -28,9 +28,9 @@ function Likes({ data }) {
       </span>
       <div className="detail">
         <span>
-          <b>{data.name} </b>
+          <b>{data.summoner} </b>
         </span>
-        <span>{data.desc}</span>
+        <span>{data.post}</span>
       </div>
     </div>
   );
