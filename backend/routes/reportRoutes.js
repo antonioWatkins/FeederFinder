@@ -9,7 +9,7 @@ router.get('/', getReport)
 router.post('/:id', protect, postReport)
 router.put('/:id', protect, putReport)
 
-router.put('/:id/like', likeReport)
+router.put('/:id/like', protect, likeReport)
 
 
 module.exports = router

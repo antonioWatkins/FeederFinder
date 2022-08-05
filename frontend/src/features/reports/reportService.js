@@ -27,13 +27,14 @@ const getReport = async (token) => {
   return response.data;
 };
 
-const likeReport = async (id, userId, token) => {
-  const config = {
+const likeReport = async (_id, token) => {
+  const response = await axios({
+    url: `${_id}/like`,
+    method: 'put',
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  };
-  const response = await axios.put(`${id}/like`, config, { userId });
+  });
   return response.data;
 };
 

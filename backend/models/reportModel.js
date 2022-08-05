@@ -19,10 +19,9 @@ summoner: {
 post: {
    type: String,
    required: false,
+},
+likes: []
 
 },
-likes: [],
-},
-
 {timestamps: true})
 module.exports = mongoose.model('Report', reportSchema)

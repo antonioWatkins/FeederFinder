@@ -116,9 +116,9 @@ const putReport = asyncHandler(async (req, res) => {
 
        const likeReport = asyncHandler(async (req, res) => {
             const id = req.params.id;
-            const { userId } = req.body;
+            const userId = req.user.id
             try {
-              const report = await reportModel.findById(id);
+              const report = await Report.findById(id);
               if (report.likes.includes(userId)) {
                 await report.updateOne({ $pull: { likes: userId } });
                 res.status(200).json("Post disliked");
@@ -127,6 +127,7 @@ const putReport = asyncHandler(async (req, res) => {
                 res.status(200).json("Post liked");
               }
             } catch (error) {
+                console.log(error, 'error')
               res.status(500).json(error);
             }
           });

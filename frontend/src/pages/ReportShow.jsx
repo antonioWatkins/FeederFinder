@@ -19,7 +19,7 @@ function ReportShow() {
   } = useSelector(
     (state) => state.report,
   );
-  console.log(report);
+  console.log(report, 'reportftr');
 
   useEffect(() => {
     if (isError) {
@@ -40,6 +40,7 @@ function ReportShow() {
     <div className='goals'>
       {report.map((report, id) => (
        <Likes data={report} key={id} />))}
+       
       </div>
       </div>
   );

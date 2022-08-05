@@ -1,30 +1,26 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 import { likeReport } from '../features/reports/reportSlice';
+import './Likes.css';
 
 function Likes({ data }) {
   const { user } = useSelector((state) => state.auth);
-  const [liked, setliked] = useState(data.likes.includes(user.id));
-  const [likes, setLikes] = useState(data.likes.length);
-
+  const liked = data.likes.includes(user.id);
+  
   const dispatch = useDispatch();
+  console.log(data._id, 'datainfo');
   const handleLike = () => {
-    dispatch(
-      likeReport(data._id, user._id),
-      setliked((prev) => !prev),
-      liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1),
-    );
+    dispatch(likeReport(data._id));
+    // eslint-disable-next-line no-unused-expressions
+
   };
+console.log(data.likes)
   return (
-    <div className='just work'>
-    <img
-    src={liked ? '/img/like.png' : '/img/unlike.png'}
-    alt=''
-    onClick={handleLike}
-    />
+      <div className='justwork'>
       <span>
-        {likes} likes
+        {data.likes.length} likes
       </span>
       <div className="detail">
         <span>
@@ -32,6 +28,11 @@ function Likes({ data }) {
         </span>
         <span>{data.post}</span>
       </div>
+    <img
+    src={liked ? '/img/like.png' : '/img/unlike.png'}
+    alt=''
+    onClick={handleLike}
+    />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import reportService from './reportService';
@@ -31,10 +32,11 @@ export const getReport = createAsyncThunk('report/getAll', async (_, thunkAPI) =
     return thunkAPI.rejectWithValue(message);
   }
 });
-export const likeReport = createAsyncThunk('report/like', async ({ id, userId }, thunkAPI) => {
+export const likeReport = createAsyncThunk('report/like', async (_id, thunkAPI) => {
   try {
-    const { token } = thunkAPI.getState().auth.user;
-    return await reportService.likeReport({ id, userId }, token);
+    const { user } = thunkAPI.getState().auth;
+    await reportService.likeReport(_id, user.token);
+    return { user: user._id, report: _id };
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message)
      || error.message || error.toString();
@@ -82,7 +84,13 @@ export const reportSlice = createSlice({
       .addCase(likeReport.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.like = action.payload;
+        
+        const report = state.report.find((r) => r._id === action.report);
+        if (report.likes.includes(action.user)) {
+          report.likes = report.likes.filter((u) => u !== action.user);
+        } else {
+          report.likes.push(action.user);
+        }
       })
       .addCase(likeReport.rejected, (state, action) => {
         state.isLoading = false;
