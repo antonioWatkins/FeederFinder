@@ -11,9 +11,7 @@ function HeroSection() {
   function onSearchbuttonClick() {
     navigate('/searchpage');
   }
-  function videoStart() {
-    'playvideo';
-  }
+
   return (
     <div className='hero-container'>
       <video src='/videos/video-2.mp4' autoPlay loop muted />
@@ -30,7 +28,7 @@ function HeroSection() {
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
-          onClick={videoStart}
+         href='api/tilted'
         >
           Dont become These guys!<i className='far fa-play-circle' />
         </Button>

@@ -14,8 +14,9 @@ import Report from './pages/Report.jsx';
 import Journal from './pages/Journal.jsx';
 import UpdateJournal from './pages/UpdateJournal.jsx';
 import ReportShow from './pages/ReportShow.jsx';
+import Tilted from './pages/Tilted.jsx';
 
-export default function () {
+export default function App() {
   return (
     <div className='App'>
     <>
@@ -35,6 +36,7 @@ export default function () {
       <Route path='/api/report/' element = {<ReportShow />} />
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
       <Route path ='/searchpage' element = {<SearchPage />} />
+      <Route path ='api/tilted' element = {<Tilted />} />
       {/* <Route path ='/homepage2' element = {<HomePage2 />} /> */}
      </Routes>
     </Router>

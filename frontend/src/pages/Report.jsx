@@ -34,7 +34,7 @@ function Report() {
   };
 
   return (
-    <div>
+    <div className='background'>
          <h1 className='reportHead'>
                Reporting on Summoner {name}
         </h1>
