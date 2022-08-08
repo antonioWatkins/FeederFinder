@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -32,7 +31,7 @@ export default function () {
       <Route path='/login' element = {<Login />} />
       <Route path='/api/feeder' element = {<Journal/>} />
       <Route path='/api/feeder/:id' element = {<UpdateJournal />} />
-      <Route path='/api/report/:id' element = {<Report />} />
+      <Route path='/api/report/:name' element = {<Report />} />
       <Route path='/api/report/' element = {<ReportShow />} />
       {/* <Route path ='/homepage' element = {<HomePage />} /> */}
       <Route path ='/searchpage' element = {<SearchPage />} />

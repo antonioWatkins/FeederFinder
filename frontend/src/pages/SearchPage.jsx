@@ -1,11 +1,14 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom/';
+import Button from 'react-bootstrap/Button';
+import './SearchPage.css';
 
 function SearchPage() {
   const [searchText, setSearchText] = useState('');
   const [playerData, setPlayerdata] = useState([]);
+  const hasEntry = Boolean(searchText);
+  const allValid = hasEntry;
   // console.log(searchText)
 
   // the real call is being called on the backend hiding the api keys
@@ -27,45 +30,61 @@ function SearchPage() {
   }
 
   return (
-    <>
-      <h5 className="heading"> search player</h5>
-      <input type="text" className='form' onChange={(e) => setSearchText(e.target.value)}></input>
-      <div>
-        <button className='btn btn-block' onClick={(e) => SearchForPlayers(e)}> Search for player</button>
+    <div className='search-container background'>
+      <div id='search-heading'>
+      <p className="heading">Search Players</p>
+      <input
+      required
+      value={searchText}
+       isinvalid={hasEntry}
+       id='search-bar'
+       type="text"
+       className='form'
+       onChange={(e) => setSearchText(e.target.value)}
+        />
+        <Button id='search-btn'
+         variant='outline-light'
+         disabled={!allValid}
+          onClick={(e) => SearchForPlayers(e)}>Search for Player</Button>
+
       </div>
       <div className='goals'>
         {playerData.map((player) => (
           <div>
 
-          <p key={player.name} className='goal'> <div>Summoner: {player.name}</div>
-            <div className="soloQ" key={player.soloQ}>Solo: {(player.soloQ || '').replace('/', 'LP : ')}</div>
-            <div className="flexQ" key={player.flexQ}>Flex: {(player.flexQ || '').replace('/', 'LP : ')}</div>
+          <p key={player.name} className='goal'>
+          <div>Summoner: <strong>{player.name}</strong></div>
+            <div className="soloQ" key={player.soloQ}>Solo: <strong>{(player.soloQ || '').replace('/', 'LP : ')}</strong></div>
+            <div className="flexQ" key={player.flexQ}>Flex: <strong>{(player.flexQ || '').replace('/', 'LP : ')}</strong></div>
           </p>
             {player.mostPlayedChamps.map((champ) => (
 
-            <div className ='goal2'>
+            <div className ='goal2 text-center'>
               <div key={champ.champName}>
-                Champion: {champ.champName}
+                Champion: <strong>{champ.champName}</strong>
               </div>
             <div key={champ.kda}>
-                KDA: {champ.kda}
+                KDA: <strong>{champ.kda}</strong>
                 </div>
                 <div key={champ.winrate}>
-                Win Rate: {champ.winrate}
+                Win Rate: <strong>{champ.winrate}</strong>
                 </div>
                 <div key={champ.totalGames}>
-                Games: {champ.totalGames}
+                Games: <strong>{champ.totalGames}</strong>
                 </div>
             </div>
             ))}
-                <h3> make a report </h3>
-            <Link to={`/api/report/${player.name}`}>
-             Report
-            </Link>
+                <h3>Write an Entry </h3>
+            <Button href={`/api/report/${player.name}`}>
+                Report
+            </Button>
+            <Button href='/api/feeder/'>
+              Journal
+            </Button>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

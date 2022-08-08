@@ -9,7 +9,7 @@ function FeederItems({ feeder }) {
   return (
     <div>
       <div className='goal'>
-        <div>{new Date(feeder.createdAt).toLocaleString('en-US')}</div>
+        {/* <div>{new Date(feeder.createdAt).toLocaleString('en-US')}</div> */}
 
         <h3>summoner: {feeder.summoner}</h3>
 
@@ -17,11 +17,8 @@ function FeederItems({ feeder }) {
         <p>game Overview: {feeder.gameOverview}</p>
         <p>player Grade: {feeder.playerGrade}</p>
         <p> teamFighting: {feeder.teamfighting}</p>
-        <div>
+        <div className='close-button'>
 
-        <Button variant='Danger' onClick={() => dispatch(deleteFeeder(feeder._id))} className='close'>
-          X
-        </Button>
       </div>
 
     <Button variant='Primary' href={(`/api/feeder/${feeder._id}`)}>
@@ -30,6 +27,9 @@ function FeederItems({ feeder }) {
     <Button variant='Secondary' href={(`/api/report/${feeder._id}`)}>
     report
     </Button>
+     <Button style={{ color: 'red' }} onClick={() => dispatch(deleteFeeder(feeder._id))} className='close'>
+     Delete
+        </Button>
     </div>
     </div>
   );

@@ -6,15 +6,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getFeederID, updateFeeder } from '../features/feeders/feederSlice';
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner.jsx';
+import './Report.css';
 
 function UpdateJournal() {
-  const [summoner, setSummoner] = useState('');
   const [laning, setlaning] = useState('');
   const [gameOverview, setGameOverview] = useState('');
   const [playerGrade, setPlayerGrade] = useState('');
   const [teamFighting, setTeamFighting] = useState('');
-  const [player, setPlayer] = useState('');
-  const [isSummoner, setIsSummoner] = useState(false);
   // const navigate =useNavigate()
   // const {user} = useSelector((state) => state.auth)
   const dispatch = useDispatch();
@@ -54,43 +52,28 @@ function UpdateJournal() {
     dispatch(updateFeeder({
       id,
       feederData: {
-        player,
-        summoner,
+        player: user,
+        summoner: feeder.summoner,
         laning,
         gameOverview,
         playerGrade,
         teamFighting,
       },
     }));
-
-    setPlayer('');
-    setSummoner('');
     setlaning('');
     setGameOverview('');
     setPlayerGrade('');
     setTeamFighting('');
   };
-
+  console.log(feeder.summoner);
   return (
     <div>
-       <h1 className='text'>
-        Update Journal Entry
+       <h1 className='reportHeader'>
+             Update Journal entry for {feeder.summoner}
         </h1>
 
       <Form className='form' onSubmit={onSubmit}>
 
-      <Form.Group className="form-group" controlId="summoner">
-        <Form.Label>Summoner Name</Form.Label>
-        <Form.Control type="text"
-          placeholder={feeder.summoner}
-          value={summoner}
-          isInvalid={isSummoner}
-          onChange={(e) => {
-            setSummoner(e.target.value);
-            setIsSummoner(true);
-          }}
-        />
-      </Form.Group>
       <Form.Group className='form-group'>
 
         <Form.Select

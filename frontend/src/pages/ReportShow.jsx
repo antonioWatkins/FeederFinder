@@ -40,7 +40,7 @@ function ReportShow() {
     <div className='goals'>
       {report.map((report, id) => (
        <Likes data={report} key={id} />))}
-       
+
       </div>
       </div>
   );

@@ -3,8 +3,7 @@ import React from 'react';
 import '../App.css';
 import './HeroSection.css';
 import { useNavigate } from 'react-router-dom';
-import { Button } from './Button';
-import './Button.css';
+import Button from 'react-bootstrap/Button';
 // mport { Navigate } from 'react-router-dom'
 
 function HeroSection() {
@@ -18,13 +17,11 @@ function HeroSection() {
   return (
     <div className='hero-container'>
       <video src='/videos/video-2.mp4' autoPlay loop muted />
-      <h1> Feeder Finder</h1>
-      <h3> Find the Feeder before they Ruin your game</h3>
+      <h1> Summoners Journal</h1>
+      <h3>Keep notes On yourself and other players</h3>
       <div className='hero btns'>
         <Button
           className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
           onClick={onSearchbuttonClick}
         >
           Find Them <i className='fa fa-search'/>

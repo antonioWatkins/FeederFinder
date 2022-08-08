@@ -8,15 +8,14 @@ import './Likes.css';
 function Likes({ data }) {
   const { user } = useSelector((state) => state.auth);
   const liked = data.likes.includes(user.id);
-  
   const dispatch = useDispatch();
   console.log(data._id, 'datainfo');
   const handleLike = () => {
     dispatch(likeReport(data._id));
-    // eslint-disable-next-line no-unused-expressions
 
+    // eslint-disable-next-line no-unused-expressions
   };
-console.log(data.likes)
+  console.log(data.likes);
   return (
       <div className='justwork'>
       <span>

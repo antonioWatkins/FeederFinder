@@ -12,6 +12,7 @@ router.get('/:id', protect, getFeederId)
 router.post('/', protect, postFeeder)
 
 router.put('/:id', protect, putFeeder) 
+router.put('/update/:name', protect, putFeeder)
 
 router.delete('/:id', protect, forgiveFeeder )
 

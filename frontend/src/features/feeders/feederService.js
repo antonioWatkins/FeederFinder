@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = '/api/feeder/';
+const API_URL_S = '/api/feeder/update';
 
 const createFeeder = async (feederData, token) => {
   const config = {
@@ -62,11 +63,24 @@ const updateFeeder = async (feederId, feederData, token) => {
   return response.data;
 };
 
+const updateMyFeeder = async (feederId, feederData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL_S + feederId, feederData, config);
+
+  return response.data;
+};
+
 const feederService = {
   createFeeder,
   getFeeder,
   deleteFeeder,
   updateFeeder,
+  updateMyFeeder,
   getFeederID,
 };
 

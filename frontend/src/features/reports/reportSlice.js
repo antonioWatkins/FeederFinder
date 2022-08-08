@@ -84,7 +84,7 @@ export const reportSlice = createSlice({
       .addCase(likeReport.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        
+
         const report = state.report.find((r) => r._id === action.report);
         if (report.likes.includes(action.user)) {
           report.likes = report.likes.filter((u) => u !== action.user);

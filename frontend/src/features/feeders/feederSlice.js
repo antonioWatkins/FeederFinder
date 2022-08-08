@@ -68,6 +68,18 @@ export const updateFeeder = createAsyncThunk('feeder/update', async ({ id, feede
   }
 });
 
+export const updateMyFeeder = createAsyncThunk('feeder/myupdate', async ({ id, feederData }, thunkAPI) => {
+  try {
+    const { token } = thunkAPI.getState().auth.user;
+    return await feederService.updateMyFeeder(id, feederData, token);
+  } catch (error) {
+    console.log(error);
+    const message = (error.response && error.response.data && error.response.data.message)
+     || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const feederSlice = createSlice({
   name: 'feeder',
   initialState,
@@ -136,6 +148,24 @@ export const feederSlice = createSlice({
         console.log('updatefeeder success', state.feeder);
       })
       .addCase(updateFeeder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        console.log('updatefeeder2 rejected', action);
+      })
+      .addCase(updateMyFeeder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateMyFeeder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.feeder = state.feeder.filter(
+          // eslint-disable-next-line no-underscore-dangle, eqeqeq
+          (feeder) => feeder._id == action.payload.id,
+        );
+        console.log('updatefeeder success', state.feeder);
+      })
+      .addCase(updateMyFeeder.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

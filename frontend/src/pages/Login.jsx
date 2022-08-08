@@ -56,7 +56,7 @@ function Login() {
   }
 
   return (
-    <>
+    <div className='background'>
 
       <section className='heading'>
         <h1>
@@ -93,10 +93,9 @@ function Login() {
       </div>
       <div className="form-group-btn">
         <button
-
           className='btn-login center'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
+          buttonStyle='btn-primary'
+          buttonSize='btn-large'
         >
           Submit
         </button>
@@ -107,7 +106,7 @@ function Login() {
     <div className='solidblock'></div>
 
     </div>
-   </>
+   </div>
   );
 }
 
