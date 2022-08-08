@@ -50,7 +50,7 @@ function Journal() {
       <FeederForm />
       <section className='content'>
         {feeder.length > 0 ? (
-          <div className='goals'>
+          <div className='Journal'>
             {feeder.map((feeder) => (
               <FeederItems key={feeder._id} feeder={feeder} />
             ))}

@@ -3,6 +3,9 @@ import { FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Form } from 'react-bootstrap';
+import validator from 'validator';
+import Button from 'react-bootstrap/Button';
 import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner.jsx';
 
@@ -24,6 +27,10 @@ function Register() {
     user, isLoading, isError, isSuccess, message,
   } = useSelector((state) => state.auth);
 
+  const isValidName = Boolean(name);
+  const isValidEmail = validator.isEmail(email);
+  const isValidPassword = password.length >= 8;
+  const allValid = isValidName && isValidEmail && isValidPassword;
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -47,7 +54,7 @@ function Register() {
     e.preventDefault();
 
     if (password !== password2) {
-      toast.error('Password do not match');
+      toast.error('Password does not match');
     } else {
       const userData = {
         name,
@@ -70,61 +77,69 @@ function Register() {
         <p> Please Create an Account</p>
       </section>
 
-      <section className='form'>
-      <form onSubmit={onSubmit}>
-      <div className='form-group'>
+      <Form className='register' onSubmit={onSubmit}>
 
-        <input
+      <Form.Group className='register-group'>
+      <Form.Label>Name</Form.Label>
+        <Form.Control
+        required
         type='text'
-        className='form-control'
+        className='register-control'
         id='name'
-      name='name'
+        name='name'
+        isInvalid={!isValidName}
         value={name}
         placeholder='Enter Summoners Name'
         onChange={onChange}
         />
-      </div>
-      <div className='form-group'>
+        <Form.Control.Feedback type='invalid'>Please enter a valid Name</Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className='register-group'>
 
-        <input
+        <Form.Control
+        required
         type='email'
-        className='form-control'
+        className='register-control'
         id='email'
       name='email'
         value={email}
+        isInvalid={!isValidEmail}
         placeholder='Enter Email'
         onChange={onChange}
         />
-      </div>
-      <div className='form-group'>
-        <input
+         <Form.Control.Feedback type='invalid'>Please enter a valid email</Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className='register-group'>
+        <Form.Control
         type='password'
-        className='form-control'
+        className='register-control'
         id='password'
-      name='password'
+        name='password'
         value={password}
+        isInvalid={!isValidPassword}
         placeholder='Enter Password'
         onChange={onChange}
         />
-      </div>
-      <div className='form-group'>
-        <input
+         <Form.Control.Feedback type='invalid'>Please enter a valid password</Form.Control.Feedback>
+
+      </Form.Group>
+      <Form.Group className='register-group'>
+        <Form.Control
         type='password'
-        className='form-control'
+        className='register-control'
         id='password2'
       name='password2'
         value={password2}
         placeholder='Confirm Password'
         onChange={onChange}
         />
-      </div>
-      <div className="form-group">
-        <button type='submit' className='btn btn-block'>
+      </Form.Group>
+
+        <Button type='submit' className='btn btn-block' disabled={!allValid}>
           Submit
-        </button>
-      </div>
-      </form>
-</section>
+        </Button>
+
+      </Form>
 
    </>
   );

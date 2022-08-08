@@ -3,6 +3,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Form } from 'react-bootstrap';
 import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner.jsx';
 import '../components/HeroSection';
@@ -27,7 +28,7 @@ function Login() {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
+    if (isSuccess || user || localStorage.getItem('loggedIn')) {
       navigate('/');
     }
 
@@ -66,11 +67,11 @@ function Login() {
       </section>
 
       <section className='form'>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
 
-      <div className='form-group'>
+      <Form.Group className='form-group'>
 
-        <input
+        <Form.Control
         type='email'
         className='form-control'
       name='email'
@@ -79,7 +80,7 @@ function Login() {
         placeholder='Enter Email'
         onChange={onChange}
         />
-      </div>
+      </Form.Group>
       <div className='form-group'>
         <input
         type='password'
@@ -100,7 +101,7 @@ function Login() {
           Submit
         </button>
       </div>
-      </form>
+      </Form>
 </section>
     <div className='background'>
     <div className='solidblock'></div>

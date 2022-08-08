@@ -87,7 +87,7 @@ h3 {
 .sidebar{
   height: 100vh;
   width: 250px;
-  background-color: blue;
+  background-color:blueviolet;
 }
 .header ul li a:hover {
   color: #777;

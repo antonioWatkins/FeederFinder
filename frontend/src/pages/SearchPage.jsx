@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import { Container } from 'react-bootstrap';
 import './SearchPage.css';
 
 function SearchPage() {
@@ -31,6 +32,8 @@ function SearchPage() {
 
   return (
     <div className='search-container background'>
+    <Container>
+
       <div id='search-heading'>
       <p className="heading">Search Players</p>
       <input
@@ -84,6 +87,7 @@ function SearchPage() {
           </div>
         ))}
       </div>
+    </Container>
     </div>
   );
 }

@@ -12,6 +12,11 @@ img {
   width:  400px;
 }
 
+#cardpic{
+  padding-left: 50px;
+  padding-bottom: 100px;
+}
+
 .cards__container {
   border: solid rebeccapurple 1px;
   display: flex;
@@ -63,7 +68,7 @@ img {
   animation-duration: 2s;
 }
 
-/* .cards__item__pic-wrap::after {
+.cards__item__pic-wrap::after {
   content: attr(data-category);
   position: absolute;
   bottom: 0;
@@ -75,7 +80,7 @@ img {
   color: #fff;
   background-color: #1f98f4;
   box-sizing: border-box;
-} */
+}
 
 .cards__item__img {
   position: absolute;

@@ -26,8 +26,7 @@ function HeroSection() {
         </Button>
         <Button
           className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
+          variant='outline-light'
          href='api/tilted'
         >
           Dont become These guys!<i className='far fa-play-circle' />
