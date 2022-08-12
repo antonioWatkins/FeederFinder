@@ -9,7 +9,7 @@ const createFeeder = async (feederData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-
+  console.log('making request');
   const response = await axios.post(API_URL, feederData, config);
 
   return response.data;

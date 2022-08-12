@@ -39,7 +39,7 @@ function Report() {
   return (
     <div className='background'>
          <h1 className='reportHead'>
-               Reporting on Summoner {name}
+               Reporting
         </h1>
 
       <Form className='form' onSubmit={onSubmit}>

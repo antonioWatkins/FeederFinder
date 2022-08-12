@@ -8,12 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import FeederForm from '../components/FeederForm';
 // eslint-disable-next-line import/extensions
 import FeederItems from '../components/FeederItems';
+import Spinner from '../components/Spinner.jsx';
 
 import './Journal.css';
 import { getFeeder } from '../features/feeders/feederSlice';
 import { reset } from '../features/auth/authSlice';
 // eslint-disable-next-line import/extensions
-import Spinner from '../components/Spinner';
 
 function Journal() {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Journal() {
   } = useSelector(
     (state) => state.feeder,
   );
-  console.log(feeder);
+  console.log('feeder', feeder);
 
   useEffect(() => {
     if (isError) {
@@ -34,7 +34,7 @@ function Journal() {
     if (!user) {
       navigate('/login');
     }
-
+    console.log('getfeeder log');
     dispatch(getFeeder());
 
     return () => {
@@ -45,6 +45,7 @@ function Journal() {
   if (isLoading) {
     return <Spinner />;
   }
+
   return (
       <div className='container'>
       <FeederForm />
@@ -56,7 +57,7 @@ function Journal() {
             ))}
           </div>
         ) : (
-          <h3>Enter your an Entry into your journal</h3>
+          <h3>Enter an Entry into your journal</h3>
         )}
       </section>
     </div>

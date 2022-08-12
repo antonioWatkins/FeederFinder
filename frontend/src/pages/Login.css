@@ -177,6 +177,33 @@ width: 100%;
 
 }
 
+.reportgoals {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+  justify-content: space-evenly;
+  min-width: 100%;
+}
+
+.reportgoal {
+  background-color: rgb(13, 64, 116);
+  color: whitesmoke;
+  border: 3px solid rgb(204, 157, 200);
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 20px 0 10px;
+}
+
+.reportgoal2 {
+  border: 1px solid rgb(13, 64, 116);
+  background-color: rgb(204, 157, 200);
+  padding: 20px 0 10px;
+  margin-top: 0.5rem;
+  flex: 1;
+  border-radius: 10px;
+}
+
+
 /* .itemgaps{
   
 } */

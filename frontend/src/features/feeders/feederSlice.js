@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import feederService from './feederService';
 
-const initialState = {
+export const initialState = {
   feeder: [],
   feederToUpdate: null,
   isError: false,

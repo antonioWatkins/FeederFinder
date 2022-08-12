@@ -1,12 +1,11 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
-const colors =require('colors')
-const port = process.env.PORT || 5000
-const connectDB = require('./config/db')
+require('colors')
+
 const {errorHandler} = require('./middleware/errorMiddleware')
 
 
-connectDB()
+
 const app = express()
 
 app.use(express.json())
@@ -18,5 +17,6 @@ app.use('/api/user', require('./routes/userRoutes'))
 
 
 app.use(errorHandler)
-app.listen(port, () => console.log(`Server started on port ${port}`))
 
+
+module.exports = app

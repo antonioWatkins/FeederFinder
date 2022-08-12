@@ -18,3 +18,7 @@ console.log(player)
         return axios.request(options).then(response => response.data=="Summoner doesn't exist"? null: response.data).catch(() => null);
     }
 })
+
+
+                    Expected: {"__v": 0, "_id": Any<String>, "gameOverview": "yep", "laning": "yep", "player": "test", "playerGrade": "untiltable", "summoner": "zed", "teamfighting": Any<String>, "user": Any<String>}
+    Received: [{"__v": 0, "_id": "62f6a35b2f4a94d0919be6c1", "gameOverview": "yep", "laning": "yep", "player": "test", "playerGrade": "untiltable", "summoner": "zed", "teamfighting": "yep", "user": "62f6a35b2f4a94d0919be6be"}]

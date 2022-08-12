@@ -11,6 +11,8 @@ function FeederForm() {
   const [playerGrade, setPlayerGrade] = useState('');
   const [teamFighting, setTeamFighting] = useState('');
   const [player, setPlayer] = useState('');
+  const summonerISValid = Boolean(summoner);
+  const allValid = summonerISValid;
 
   // const {user} = useSelector((state) => state.auth)
   const dispatch = useDispatch();
@@ -47,31 +49,35 @@ function FeederForm() {
 
       <Form.Group className="form-group" controlId="summoner">
         <Form.Label>Summoner Name</Form.Label>
-        <Form.Control type="text"
+        <Form.Control
+        required
+         type="text"
          value={summoner}
+         isInvalid={!summonerISValid}
+          placeholder='Enter Summoners Name'
          onChange={(e) => {
            setSummoner(e.target.value);
-         }} placeholder="Please Enter Summoners Name" />
-        {/* <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text> */}
+         }}
+           />
+          <Form.Control.Feedback>Please enter a Summoners name</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className='form-group'>
 
         <Form.Select
-        aria-label='player-ratiing'
-        onSubmit={onSubmit}
+        required
+        aria-label='player-rating'
         value={playerGrade}
         onChange={(e) => setPlayerGrade(e.target.value)}
         >
         {/* <option value=''>Player Grade</option> */}
         <option value=''>Must select a Grade</option>
-          <option value='Great Teammate'>Great Teammate</option>
-          <option value='Untiltable'>Untiltable</option>
-          <option value='Great Shotcaller'>Great ShotCaller</option>
-          <option value='Carryable'>Carryable</option>
-          <option value='Just a Bad Game '>Just a bad Game</option>
+          <option value='Great Teammate' data-testid="select-option">Great Teammate</option>
+          <option value='Untiltable' data-testid="select-option">Untiltable</option>
+          <option value='Great Shotcaller' data-testid="select-option">Great ShotCaller</option>
+          <option value='Carryable' data-testid="select-option">Carryable</option>
+          <option value='Just a Bad Game ' data-testid="select-option">Just a bad Game</option>
         </Form.Select>
+          <Form.Control.Feedback>Please enter a Summoners name</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="form-group" controlId="formBasicPassword">
         <Form.Label>
@@ -86,7 +92,7 @@ function FeederForm() {
         }} placeholder="team fighting" />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={!allValid}>
         Submit
       </Button>
 

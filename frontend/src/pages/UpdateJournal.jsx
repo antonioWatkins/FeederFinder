@@ -34,17 +34,14 @@ function UpdateJournal() {
     if (!user) {
       navigate('/login');
     }
-
-    dispatch(getFeederID(id));
+    if (user) {
+      dispatch(getFeederID(id));
+    }
 
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch]);
-
-  if (isLoading || !feeder) {
-    return <Spinner />;
-  }
+  }, [user, navigate, id, isError, message, dispatch]);
 
   const onSubmit = async (event) => {
     console.log('im here');
@@ -65,7 +62,9 @@ function UpdateJournal() {
     setPlayerGrade('');
     setTeamFighting('');
   };
-  console.log(feeder.summoner);
+  if (isLoading || !feeder) {
+    return <Spinner />;
+  }
   return (
     <div>
        <h1 className='reportHeader'>
@@ -97,16 +96,16 @@ function UpdateJournal() {
         </Form.Label>
         <Form.Control className='form-group2' type="textarea" onChange={(e) => {
           setGameOverview(e.target.value);
-        }} placeholder={feeder.laning || 'what happend with this player'} />
+        }} placeholder={feeder.gameOverview || 'what happend with this player'} />
         <Form.Control className='form-group2' value={laning} type="textarea" onChange={(e) => {
           setlaning(e.target.value);
-        }} placeholder={teamFighting || 'laning'} />
+        }} placeholder={feeder.laning || 'laning'} />
         <Form.Control className='form-group2' value={teamFighting} type="textarea" onChange={(e) => {
           setTeamFighting(e.target.value);
-        }} placeholder="team fighting" />
+        }} placeholder={feeder.teamFighting || 'teamfighting'} />
       </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" href='/api/feeder'>
           Submit
         </Button>
       </Form>

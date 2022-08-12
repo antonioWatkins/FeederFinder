@@ -31,7 +31,7 @@ const postFeeder = asyncHandler(async (req, res) => {
         playerGrade: req.body.playerGrade,
         gameOverview: req.body.gameOverview,
         laning: req.body.laning,
-        teamFighting: req.body.teamFighting
+        teamfighting: req.body.teamFighting
     })
     res.status(200).json(feeder)
 }catch(e){
