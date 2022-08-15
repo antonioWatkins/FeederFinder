@@ -27,6 +27,10 @@ function ReportShow() {
     if (isError) {
       console.log(message);
     }
+
+    if (!user) {
+      navigate('/');
+    }
     dispatch(getReport());
 
     return () => {
@@ -38,13 +42,14 @@ function ReportShow() {
     return <Spinner />;
   }
   return (
-   <div className='report-container'>
+   <div className='report-container background'>
    <h1>Report Page</h1>
    <div>
       <Form>
         <Form.Group>
           <Form.Control
           type='text'
+          className='form'
            placeholder='Search...'
            onChange={(event) => {
              setSearchText(event.target.value);

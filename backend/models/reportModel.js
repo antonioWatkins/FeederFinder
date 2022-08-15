@@ -20,7 +20,6 @@ post: {
    type: String,
    required: false,
 },
-likes: []
 
 },
 {timestamps: true})

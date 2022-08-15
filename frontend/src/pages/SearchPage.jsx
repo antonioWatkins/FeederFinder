@@ -29,7 +29,7 @@ function SearchPage() {
 
   // eslint-disable-next-line no-unused-vars
   function SearchForPlayers(response) {
-    const players = searchText.split(',').slice(0, 5).map((strplayer) => strplayer.toLowerCase().replace('has entered the lobby', '').trim());
+    const players = searchText.split(',').slice(0, 5).map((strplayer) => strplayer.toLowerCase().replace('has joined the lobby', '').trim());
     // eslint-disable-next-line no-shadow
     Promise.all(players.map(SearchForPlayer))
       .then((playerData) => setPlayerdata(playerData));

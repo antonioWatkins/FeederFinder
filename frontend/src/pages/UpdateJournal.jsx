@@ -100,12 +100,12 @@ function UpdateJournal() {
         <Form.Control className='form-group2' value={laning} type="textarea" onChange={(e) => {
           setlaning(e.target.value);
         }} placeholder={feeder.laning || 'laning'} />
-        <Form.Control className='form-group2' value={teamFighting} type="textarea" onChange={(e) => {
-          setTeamFighting(e.target.value);
-        }} placeholder={feeder.teamFighting || 'teamfighting'} />
+         <Form.Control className='form-group2' type="textarea" onChange={(e) => {
+           setTeamFighting(e.target.value);
+         }} placeholder={feeder.teamfighting || 'team fighting' } />
       </Form.Group>
 
-        <Button variant="primary" type="submit" href='/api/feeder'>
+        <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>

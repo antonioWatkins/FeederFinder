@@ -69,7 +69,7 @@ function Register() {
     return <Spinner />;
   }
   return (
-  <>
+  <div className='background'>
       <section className='heading'>
         <h1>
           <FaUser /> Register
@@ -77,14 +77,14 @@ function Register() {
         <p> Please Create an Account</p>
       </section>
 
-      <Form className='register' onSubmit={onSubmit}>
+      <Form className='form' onSubmit={onSubmit}>
 
-      <Form.Group className='register-group'>
+      <Form.Group className='form-group'>
       <Form.Label>Name</Form.Label>
         <Form.Control
         required
         type='text'
-        className='register-control'
+        className='form-control'
         id='name'
         name='name'
         isInvalid={!isValidName}
@@ -94,12 +94,12 @@ function Register() {
         />
         <Form.Control.Feedback type='invalid'>Please enter a valid Name</Form.Control.Feedback>
       </Form.Group>
-      <Form.Group className='register-group'>
+      <Form.Group className='form-group'>
 
         <Form.Control
         required
         type='email'
-        className='register-control'
+        className='form-control'
         id='email'
       name='email'
         value={email}
@@ -109,10 +109,10 @@ function Register() {
         />
          <Form.Control.Feedback type='invalid'>Please enter a valid email</Form.Control.Feedback>
       </Form.Group>
-      <Form.Group className='register-group'>
+      <Form.Group className='form-group'>
         <Form.Control
         type='password'
-        className='register-control'
+        className='form-control'
         id='password'
         name='password'
         value={password}
@@ -123,10 +123,11 @@ function Register() {
          <Form.Control.Feedback type='invalid'>Please enter a valid password</Form.Control.Feedback>
 
       </Form.Group>
-      <Form.Group className='register-group'>
+      <Form.Group className='form-group'>
         <Form.Control
+        required
         type='password'
-        className='register-control'
+        className='form-control'
         id='password2'
       name='password2'
         value={password2}
@@ -135,13 +136,13 @@ function Register() {
         />
       </Form.Group>
 
-        <Button type='submit' className='btn btn-block' disabled={!allValid}>
+        <Button type='submit' variant='outline-light' disabled={!allValid}>
           Submit
         </Button>
 
       </Form>
 
-   </>
+   </div>
   );
 }
 

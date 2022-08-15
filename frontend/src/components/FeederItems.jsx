@@ -24,7 +24,7 @@ function FeederItems({ feeder }) {
     <Button variant='Primary' href={(`/api/feeder/${feeder._id}`)}>
       update
     </Button>
-    <Button variant='Secondary' href={(`/api/report/${feeder._id}`)}>
+    <Button variant='Secondary' href={(`/api/report/${feeder.summoner}`)}>
     report
     </Button>
      <Button style={{ color: 'red' }} onClick={() => dispatch(deleteFeeder(feeder._id))} className='close'>

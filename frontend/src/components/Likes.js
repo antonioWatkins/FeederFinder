@@ -11,13 +11,13 @@ function Likes({ data }) {
   return (
       <div className='reportgoal'>
       <span>
-        {data.likes.length} likes
+      Posted by {data.player}
       </span>
       <div className="detail">
-        <span>
-          <b>{data.summoner} </b>
-        </span>
-        <span>{data.post}</span>
+        <div className= 'detail-summoenr'>
+          <b>Report on Summoner {data.summoner}</b>
+        </div>
+        <div className='detail-post'>{data.post}</div>
       </div>
     </div>
   );
